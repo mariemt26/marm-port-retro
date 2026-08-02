@@ -33,7 +33,6 @@ export const SITE = {
 export const BASE = "";
 export const HOME = BASE || "/";
 
-/** Fills a canvas context with television snow. */
 export function paintStatic(
   ctx: CanvasRenderingContext2D,
   w: number,

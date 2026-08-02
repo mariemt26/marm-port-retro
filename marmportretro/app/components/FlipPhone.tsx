@@ -14,12 +14,12 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   { key: "1", ja: "Email", en: "EMAIL", value: SITE.email, href: `mailto:${SITE.email}` },
-  { key: "2", ja: "Professional", en: "LINKEDIN", value: "/in/mariemtouati", href: "#", external: true },
-  { key: "3", ja: "Code", en: "GITHUB", value: "github.com/mariemtouati", href: "#", external: true },
+  { key: "2", ja: "Professional", en: "LINKEDIN", value: "/in/mariemtouati", href: "https://www.linkedin.com/in/mariem-touati-297894216/", external: true },
+  { key: "3", ja: "Code", en: "GITHUB", value: "github.com/mariemtouati", href: "https://github.com/mariemt26", external: true },
   { key: "4", ja: "Visual boards", en: "PINTEREST", value: "@mariemtouati", href: "#", external: true },
-  { key: "5", ja: "Reading", en: "GOODREADS", value: "/mariemtouati", href: "#", external: true },
+  { key: "5", ja: "Reading", en: "STORYGRAPH", value: "/marmalade_toast", href: "https://app.thestorygraph.com/profile/marmalade_toast", external: true },
   { key: "6", ja: "Social", en: "INSTAGRAM", value: "@marmalade.studios", href: "#", external: true },
-  { key: "7", ja: "Listening", en: "LAST.FM", value: "/user/mariemtouati", href: "#", external: true },
+  { key: "7", ja: "Listening", en: "LAST.FM", value: "/user/mariemtouati", href: "https://www.last.fm/user/marm-w-toast", external: true },
   { key: "8", ja: "Full CV", en: "RESUME PDF", value: "resume.pdf", href: "#", external: true },
 ];
 

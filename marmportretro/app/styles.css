@@ -415,7 +415,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   white-space:nowrap;overflow:hidden;color:var(--ink);
 }
 .radio-track span{display:inline-block}
-.radio-track.scroll span{animation:tickerText 11s linear infinite;padding-right:2.5em}
+.radio-track.scroll span{animation:tickerText 11s linear infinite;padding-right:2.5em;will-change:transform}
 @keyframes tickerText{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .radio-artist{font-size:10.5px;letter-spacing:.06em;color:rgba(22,34,74,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 

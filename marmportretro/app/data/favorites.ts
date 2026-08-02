@@ -12,7 +12,6 @@ export type Favorite = {
 };
 
 export type FavoriteGroup = {
-  /** tab label */
   name: string;
   items: Favorite[];
 };

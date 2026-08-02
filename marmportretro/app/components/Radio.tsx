@@ -4,7 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import useLastFm from "../hooks/useLastFm";
 import { stations } from "../data/stations";
 
-const NOW_FREQ = 50; 
+/**
+ * FM MARMALADE — the persistent radio.
+ *
+ * The dial is real: drag it, click it, arrow-key it, or hit a preset
+ * to tune between the live Last.fm feed and your own stations.
+ */
+
+const NOW_FREQ = 50; // where the live feed sits on the dial
 
 export default function Radio() {
   const { state, title, artist, art, playing } = useLastFm();
@@ -17,7 +24,7 @@ export default function Radio() {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const stripRef = useRef<HTMLDivElement | null>(null);
 
-
+  /** the nearest station, or the live feed if we're near the middle */
   const nearest = stations.reduce((best, s) =>
     Math.abs(s.freq - freq) < Math.abs(best.freq - freq) ? s : best
   );
@@ -26,23 +33,47 @@ export default function Radio() {
     ? Math.abs(freq - NOW_FREQ) < 7
     : Math.abs(freq - nearest.freq) < 7;
 
+  /** whichever cover art applies right now */
+  const cover = onNow ? art : nearest.art;
 
+  /* what the screen shows right now */
+  const showing = onNow
+    ? {
+        state: locked ? state : "TUNING…",
+        head: locked ? title : "· · · · ·",
+        sub: locked ? artist : "keep turning",
+        band: "78.5",
+        name: "NOW PLAYING",
+      }
+    : {
+        state: locked ? `● ${nearest.name}` : "TUNING…",
+        head: locked ? nearest.lines[line % nearest.lines.length] : "· · · · ·",
+        sub: locked ? `FM ${nearest.band}` : "keep turning",
+        band: nearest.band,
+        name: nearest.name,
+      };
+
+  /* cycle the station's lines while tuned in */
   useEffect(() => {
     if (onNow || !locked) return;
     const id = setInterval(() => setLine((n) => n + 1), 4200);
     return () => clearInterval(id);
   }, [onNow, locked, nearest.name]);
 
-
+  /* Marquee the headline only when it overflows.
+     Keyed to the headline itself, NOT the frequency — otherwise every
+     pointer move during a drag re-measures and the text flickers. */
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    setScroll(false);
     const span = el.querySelector("span");
-    if (span && span.scrollWidth > el.clientWidth) setScroll(true);
-  }, [title, minimised, freq]);
+    if (!span) return;
+    const needed = span.scrollWidth > el.clientWidth + 2;
+    // only touch state when the answer actually changes
+    setScroll((prev) => (prev === needed ? prev : needed));
+  }, [showing.head, minimised]);
 
-
+  /* dragging the dial */
   useEffect(() => {
     if (!dragging) return;
     const move = (e: PointerEvent) => {
@@ -66,23 +97,6 @@ export default function Radio() {
     setFreq(Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)));
     setDragging(true);
   };
-
-
-  const showing = onNow
-    ? {
-        state: locked ? state : "TUNING…",
-        head: locked ? title : "· · · · ·",
-        sub: locked ? artist : "keep turning",
-        band: "78.5",
-        name: "NOW PLAYING",
-      }
-    : {
-        state: locked ? `● ${nearest.name}` : "TUNING…",
-        head: locked ? nearest.lines[line % nearest.lines.length] : "· · · · ·",
-        sub: locked ? `FM ${nearest.band}` : "keep turning",
-        band: nearest.band,
-        name: nearest.name,
-      };
 
   const classes = [
     "radio",
@@ -111,9 +125,9 @@ export default function Radio() {
 
       <div className="radio-body">
         <div className="radio-art" aria-hidden="true">
-          {onNow && locked && art ? (
+          {locked && cover ? (
             /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={art} alt="" />
+            <img src={cover} alt="" />
           ) : (
             <span className="art-blank">{locked ? "◉" : "?"}</span>
           )}
@@ -128,7 +142,9 @@ export default function Radio() {
             ref={trackRef}
             title={showing.head}
           >
-            <span>{scroll ? `${showing.head}　★　${showing.head}　★　` : showing.head}</span>
+            <span>
+              {scroll ? `${showing.head}　★　${showing.head}　★　` : showing.head}
+            </span>
           </div>
           <span className="radio-artist">{showing.sub}</span>
           <div className="eq" aria-hidden="true">
@@ -137,6 +153,7 @@ export default function Radio() {
         </div>
       </div>
 
+      {/* --- the tuning dial --- */}
       <div
         className="radio-dialstrip"
         ref={stripRef}
@@ -149,12 +166,21 @@ export default function Radio() {
         aria-valuenow={Math.round(freq)}
         aria-valuetext={showing.name}
         onKeyDown={(e) => {
-          if (e.key === "ArrowRight") { e.preventDefault(); setFreq((f) => Math.min(100, f + 4)); }
-          if (e.key === "ArrowLeft") { e.preventDefault(); setFreq((f) => Math.max(0, f - 4)); }
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            setFreq((f) => Math.min(100, f + 4));
+          }
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            setFreq((f) => Math.max(0, f - 4));
+          }
         }}
       >
-  
-        <span className="mark-now" style={{ left: `${NOW_FREQ}%` }} aria-hidden="true" />
+        <span
+          className="mark-now"
+          style={{ left: `${NOW_FREQ}%` }}
+          aria-hidden="true"
+        />
         {stations.map((s) => (
           <span
             key={s.name}
@@ -166,7 +192,7 @@ export default function Radio() {
         <div className="radio-needle" style={{ left: `${freq}%` }} />
       </div>
 
-
+      {/* --- presets --- */}
       <div className="radio-presets" role="group" aria-label="Station presets">
         <button
           className={`preset ${onNow && locked ? "on" : ""}`}
@@ -192,7 +218,8 @@ export default function Radio() {
               title={st.name}
             >
               <b>{i + 2}</b>
-              <i>{st.name.split(" ")[0]}</i>
+              {/* drop a leading "THE" so the labels stay distinct */}
+              <i>{st.name.replace(/^THE /, "")}</i>
             </button>
           );
         })}

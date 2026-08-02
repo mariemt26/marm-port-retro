@@ -67,7 +67,7 @@ export const projects: Project[] = [
     label: "FLEURISH",
     color: "#E89EB8",
     blurb:
-      "Plant-based social app where you scan, identify, and log the plants you meet on everyday ventures. Compete with friends to grow the biggest garden.",
+      "Plant-based social app where you scan, identify, and log the plants you meet on everyday ventures. Compete with friends to grow the biggest garden. Made as a 12-hour hackathon project.",
     metrics: [],
     tags: ["MOBILE", "REACT NATIVE", "ENVIRONMENT"],
     featured: true,
