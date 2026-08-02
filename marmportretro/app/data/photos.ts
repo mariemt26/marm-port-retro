@@ -16,8 +16,8 @@ export type Photo = {
 export const photos: Photo[] = [
   {
     src: "/photos/01.jpg",
-    caption: "TODO — where this was, or what was happening",
-    alt: "TODO — describe the photo",
+    caption: "TODO",
+    alt: "TODO — This is where a description would be, if I had one.",
     file: "photo-01.jpg",
   },
   {
