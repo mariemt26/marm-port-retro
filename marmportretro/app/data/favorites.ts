@@ -35,12 +35,7 @@ export const favorites: FavoriteGroup[] = [
   {
     name: "Anime",
     items: [
-      {
-        title: "Lupin the Third",
-        by: "TMS Entertainment",
-        image: "/favorites/LupinIII.webp",
-        note: "Part 4 is set in San Marino — the reason all my plants have Italian names.",
-      },
+      {title: "Lupin the Third", by: "TMS Entertainment", image: "/favorites/LupinIII.webp", note: "Part 4 is set in San Marino — the reason all my plants have Italian names.",},
       { title: "Paradise Kiss", by: "Studio Madhouse", image: "/favorites/paradisekiss.jpg", note: "The fashion, the complex relationships, and Tommy heavenly6. What is not to love about this one?", },
       { title: "Ping Pong the Animation", by: "Tatsunoko Production", image: "/favorites/pingpong.jpg", note: "Watched this one during a tough transitional period of my life. I hold a huge soft spot for it.",},
       { title: "Neon Genesis Evangelion", by: "Gainax", image: "/favorites/evangelion.jpg", note: "This made me realize that my writing lore wasn't mind-bending enough", },

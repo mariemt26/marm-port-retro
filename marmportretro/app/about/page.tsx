@@ -61,7 +61,7 @@ const LANGUAGES: [string, string][] = [
   ["Arabic", "Fluent"],
   ["Algerian Arabic", "Fluent"],
   ["Spanish", "Intermediate"],
-  ["Italian", "Intermediate"],
+  ["Italian", "Introductory"],
   ["Japanese", "Introductory"],
 ];
 
