@@ -1,7 +1,11 @@
 /* =====================================================
    Every project lives here. Add one object and it shows
-   up on /projects automatically; give it a `study` and it
-   gets a full case study page at /projects/<slug>.
+   up on /projects automatically.
+
+   A project links to a case study ONLY if it has a
+   `study` key. Leave it off and the tape renders but
+   doesn't go anywhere — which is what you want until
+   the write-up actually exists.
    ===================================================== */
 
 export type Metric = { label: string; value: string };
@@ -65,36 +69,63 @@ export const projects: Project[] = [
     blurb:
       "Plant-based social app where you scan, identify, and log the plants you meet on everyday ventures. Compete with friends to grow the biggest garden.",
     metrics: [],
-    tags: ["MOBILE", "ENVIRONMENT"],
+    tags: ["MOBILE", "REACT NATIVE", "ENVIRONMENT"],
     featured: true,
     study: {
-      headline: ["TODO —", "TODO."],
+      headline: ["A garden you grow", "by paying attention."],
       facts: [
-        { label: "TYPE", value: "TODO" },
-        { label: "ROLE", value: "TODO" },
-        { label: "TEAM", value: "TODO" },
-        { label: "DURATION", value: "TODO, 2026" },
+        { label: "ROLE", value: "Front-end designer" },
+        { label: "TEAM", value: "Four members: Two frontend, two backend" },
+        { label: "STACK", value: "React Native, TypeScript, Supabase, PostGIS" },
+        { label: "YEAR", value: "2026" },
       ],
       sections: [
         {
-          kana: "PROBLEM",
-          title: "TODO",
-          body: ["TODO"],
+          kana: "THE APP",
+          title: "Nature made Informative",
+          body: [
+            "Oftentimes on our daily excursions, we look straight ahead and opt to neglect the nature that sways in the breeze around us. Very infrequently do we ever have the time to stop and smell the roses. Therefore, my team and I took it upon ourselves to make a flora social media app, where your digital garden is rooted in discovery!",
+          ],
         },
         {
-          kana: "DESIGN",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "OUTCOME",
-          title: "TODO",
-          body: ["TODO"],
+          kana: "VISUAL IDENTITY",
+          title: "Impressionism in the Age of Minimalism",
+          body: [
+            "Where most plant-based apps opt for a clinical green and white color palette, with very few ever adding an extra color onto their palatte, we wished to make Fleurish exude a naturally whimsical air. As both front-end designers are also seasoned artists, we went back to the classics, taking inspiration from impressionist artists such as Claude Monet and Pierre-Auguste Renoir.",
+            "From that one decision, deciding upon the rest of the palette was simple, and utilizing some of their most famous works within our app's UI gave it the daydream-esque environment we had strived for at the beginning.",
+            "With our choice of including paintings, we knew that the colors would have to match. Lighter colors for lighter screens, darker colors for darker ones. Therefore, we decided to opt for a 5 color palette, with all the text in our app a dark, reflective green to match the theme. When including a piece, the opacity was dimmed, to give the app an airy feel while ensuring accessibility among the different screens and abiding by WCAG standards. On many of our screens, the paintings are simply top and bottom borders, accompanied by striking vector art.",
+          ],
+          pull: "Why forget that art and nature can go hand-in-hand?",
         },
       ],
-      // add screenshots when you have them:
-      // gallery: [{ src: "/fleurish/01.png", caption: "TODO", alt: "TODO" }],
-      reflection: "TODO",
+
+      /* ── screenshots ──────────────────────────────────
+         Files go in public/fleurish/. Rename these to match
+         yours and delete any you don't have — a missing file
+         renders as a broken image.
+         Captions are where the value is: say what the screen
+         solves, not what it is.
+         ─────────────────────────────────────────────── */
+      gallery: [
+        {
+          src: "/fleurish/Landing pages.png",
+          caption: "The first screens the user sees when opening the app.",
+          alt: "landing page.",
+        },
+        {
+          src: "/fleurish/Login flow.png",
+          caption: "These are the login, register, and forgot password screens.",
+          alt: "login,register,and forgot password screens.",
+        },
+        {
+          src: "/fleurish/Pages.png",
+          caption: "The initial pages the user can navigate through via the navigation at the bottom.",
+          alt: "initial screens after login.",
+        },
+      ],
+
+      reflection:
+        "More on the identify-to-leaderboard flow and the AI diagnosis UI is on its way. I'd rather write it properly than rush it. Happy to walk through either in a conversation in the meantime.",
     },
   },
 
@@ -105,104 +136,15 @@ export const projects: Project[] = [
     title: "KnightRate: For Knights, By Knights",
     label: "KNIGHTRATE",
     color: "#FFC22E",
-    // file lives at public/KnightRateLogo.png
     image: "/KnightRateLogo.png",
     imageAlt: "KnightRate logo",
     blurb:
       "Course reviews for UCF students, with the study resources attached. Ratings tell you a class is hard; KnightRate tells you what got people through it.",
     metrics: [],
-    tags: ["WEB APP", "MOBILE", "EDUCATION"],
+    tags: ["WEB APP", "MERN", "EDUCATION"],
     featured: true,
-    study: {
-      headline: ["Reviews that", "hand you the notes."],
-      facts: [
-        { label: "TYPE", value: "Self-directed project" },
-        { label: "ROLE", value: "TODO — design? design + build?" },
-        { label: "TEAM", value: "TODO — solo, or who else?" },
-        { label: "DURATION", value: "TODO, 2026" },
-      ],
-      sections: [
-        {
-          kana: "PROBLEM",
-          title: "Ratings without resources are only half an answer",
-          body: [
-            "Course reviews tell you a class is hard, that the curve is generous, that the professor doesn't take attendance. What they never tell you is the thing students actually pass the class with — the study guide someone made in 2023, the practice exams, the one YouTube playlist that finally explained recursion.",
-            "That material exists. It just lives in group chats, in a friend's Google Drive, in a Discord that dies at the end of every semester. Every cohort rebuilds it from nothing.",
-          ],
-        },
-        {
-          kana: "RESEARCH",
-          title: "TODO — what did you actually learn from students?",
-          body: [
-            "Replace this with what you found. Even informal counts: how many students you talked to, where they said they currently look for materials, what made them distrust existing review sites.",
-          ],
-          list: [
-            "TODO — a finding that surprised you",
-            "TODO — a behaviour you saw repeatedly",
-            "TODO — something that killed an assumption you had",
-          ],
-          pull: "TODO — the one sentence that reframed the project for you.",
-        },
-        {
-          kana: "DESIGN",
-          title: "Making a resource worth attaching",
-          body: ["TODO — describe the decisions. Some questions worth answering here:"],
-          list: [
-            "How does someone rate a course without it turning into a professor popularity contest?",
-            "What stops the resource library filling with dead links and junk?",
-            "How do you show a course at a glance — one score, or several dimensions?",
-            "What does a course page look like when nobody has reviewed it yet?",
-            "How do you handle academic integrity, so it stays study materials and not answer keys?",
-          ],
-          // ── inline screenshots for this section ──
-          // Files go in public/knightrate/. Rename these to match yours,
-          // and delete any you don't have — a missing file shows a broken icon.
-          images: [
-            {
-              src: "/knightrate/course-page.png",
-              caption: "Course page — rating summary with attached resources",
-              alt: "Course detail screen showing a rating breakdown and a list of shared files",
-            },
-            {
-              src: "/knightrate/search.png",
-              caption: "Search by course code or professor",
-              alt: "Search results screen listing matching courses",
-            },
-          ],
-        },
-        {
-          kana: "TESTING",
-          title: "TODO — what did you put in front of people?",
-          body: [
-            "Even a rough round counts. What you showed them, what confused them, what you changed because of it. If a feature got cut here, say so — that's the most convincing part of any case study.",
-          ],
-        },
-      ],
-
-      // ── a block of plates at the end, after the sections ──
-      // Use this for the Figma frames that don't belong to one section.
-      gallery: [
-        {
-          src: "/knightrate/flow.png",
-          caption: "Full user flow, from search to saved resource",
-          alt: "Flow diagram of the KnightRate user journey",
-          wide: true,
-        },
-        {
-          src: "/knightrate/wireframes.png",
-          caption: "Early wireframes",
-          alt: "Grid of low-fidelity wireframe screens",
-        },
-        {
-          src: "/knightrate/components.png",
-          caption: "Component set — cards, ratings, file rows",
-          alt: "Figma component library showing reusable UI pieces",
-        },
-      ],
-
-      reflection:
-        "TODO — what you'd do differently. This is the section recruiters read closest, so be specific: a decision you'd reverse, a step you skipped, something the project taught you that you now do by default.",
-    },
+    // No `study` yet — the tape renders but doesn't link.
+    // Add one when the write-up is ready.
   },
 
   {
@@ -213,39 +155,10 @@ export const projects: Project[] = [
     label: "CONNECTED",
     color: "#FF991C",
     blurb:
-      "A nonprofit fostering a growing web of education leaders in rural Latin America. I served as their enthusiastic volunteer.",
+      "A nonprofit fostering a growing web of education leaders in rural Latin America. I design their wireframes and UI components as a Develop for Good student designer.",
     metrics: [],
     tags: ["WEB APP", "EDUCATION", "NONPROFIT"],
     featured: true,
-    study: {
-      headline: ["TODO —", "TODO."],
-      facts: [
-        { label: "TYPE", value: "TODO" },
-        { label: "ROLE", value: "Volunteer" },
-        { label: "TEAM", value: "TODO" },
-        { label: "DURATION", value: "TODO, 2026" },
-      ],
-      sections: [
-        {
-          kana: "PROBLEM",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "DESIGN",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "OUTCOME",
-          title: "TODO",
-          body: ["TODO"],
-        },
-      ],
-      // add screenshots:
-      // gallery: [{ src: "/connected/01.png", caption: "TODO", alt: "TODO" }],
-      reflection: "TODO",
-    },
   },
 
   {
@@ -258,36 +171,7 @@ export const projects: Project[] = [
     blurb:
       "Check off what's already in your kitchen and get recipes tailored to your fashionable lack. No more Googling substitutes for cake flour mid-bake.",
     metrics: [],
-    tags: ["MOBILE", "RECREATIONAL"],
-    study: {
-      headline: ["TODO —", "TODO."],
-      facts: [
-        { label: "TYPE", value: "TODO" },
-        { label: "ROLE", value: "TODO" },
-        { label: "TEAM", value: "TODO" },
-        { label: "DURATION", value: "TODO, 2026" },
-      ],
-      sections: [
-        {
-          kana: "PROBLEM",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "DESIGN",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "OUTCOME",
-          title: "TODO",
-          body: ["TODO"],
-        },
-      ],
-      // add screenshots when you have them:
-      // gallery: [{ src: "/chef-up/01.png", caption: "TODO", alt: "TODO" }],
-      reflection: "TODO",
-    },
+    tags: ["WEB", "REACT", "RECREATIONAL"],
   },
 
   {
@@ -298,38 +182,9 @@ export const projects: Project[] = [
     label: "LOGOPHILE",
     color: "#950606",
     blurb:
-      "A rare word dictionary. Perfect for all those who want to increase their vocabular level. Collect rare words, use them in sentences, and play memorization games.",
+      "A rare-word dictionary for anyone building their vocabulary. Collect words, use them in sentences, and play memorisation games to make them stick.",
     metrics: [],
-    tags: ["WEB", "TYPOGRAPHY"],
-    study: {
-      headline: ["TODO —", "TODO."],
-      facts: [
-        { label: "TYPE", value: "TODO" },
-        { label: "ROLE", value: "TODO" },
-        { label: "TEAM", value: "TODO" },
-        { label: "DURATION", value: "TODO, 2026" },
-      ],
-      sections: [
-        {
-          kana: "PROBLEM",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "DESIGN",
-          title: "TODO",
-          body: ["TODO"],
-        },
-        {
-          kana: "OUTCOME",
-          title: "TODO",
-          body: ["TODO"],
-        },
-      ],
-      // add screenshots when you have them:
-      // gallery: [{ src: "/logophile-lexicon/01.png", caption: "TODO", alt: "TODO" }],
-      reflection: "TODO",
-    },
+    tags: ["WEB", "TYPESCRIPT", "LEARNING"],
   },
 ];
 
