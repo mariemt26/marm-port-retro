@@ -72,7 +72,7 @@ const LINKS = [
     href: "https://www.linkedin.com/in/mariem-touati",
     glyph: "▤",
   },
-  { label: "Resume.pdf", href: "/resume.pdf", glyph: "▥" },
+  { label: "Resume.pdf", href: "https://drive.google.com/file/d/1ydc5YTQuzeDACCAQimrMR6_45ZrbABfl/view?usp=sharing", glyph: "▥" },
   { label: "Email", href: "mailto:mariemtouati.04@gmail.com", glyph: "✉" },
 ];
 

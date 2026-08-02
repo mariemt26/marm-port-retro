@@ -20,7 +20,7 @@ const ENTRIES: Entry[] = [
   { key: "5", ja: "Reading", en: "STORYGRAPH", value: "/marmalade_toast", href: "https://app.thestorygraph.com/profile/marmalade_toast", external: true },
   { key: "6", ja: "Social", en: "INSTAGRAM", value: "@marmalade.studios", href: "#", external: true },
   { key: "7", ja: "Listening", en: "LAST.FM", value: "/user/mariemtouati", href: "https://www.last.fm/user/marm-w-toast", external: true },
-  { key: "8", ja: "Full CV", en: "RESUME PDF", value: "resume.pdf", href: "#", external: true },
+  { key: "8", ja: "Full CV", en: "RESUME PDF", value: "resume.pdf", href: "https://drive.google.com/file/d/1ydc5YTQuzeDACCAQimrMR6_45ZrbABfl/view?usp=sharing", external: true },
 ];
 
 const KEYS: [string, string][] = [
