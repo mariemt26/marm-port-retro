@@ -63,7 +63,7 @@ export const favorites: FavoriteGroup[] = [
     name: "Games",
     items: [
       { title: "Deltarune", by: "Toby Fox", image: "/favorites/deltarune.webp", note: "DIdn't put Undertale on this list because I've been so obsessed with it the past 10 years, everyone who knows me well enough knows that.", },
-      { title: "Persona 5", by: "ATLUS", image: "/favorites/persona_5_cover_art.jpg", note: "The entire series is amazing but 5 is where I started. Also, I love Futaba.", },
+      { title: "Persona 5", by: "ATLUS", image: "/favorites/Persona_5_cover_art.jpg", note: "The entire series is amazing but 5 is where I started. Also, I love Futaba.", },
       { title: "Neir Automata", by: "ATLUS", image: "/favorites/neir.jpg", note: "First time I ever played an RPG like this. Felt good not dying a million times.", },
       { title: "Pokemon", by: "GameFreak", image: "/favorites/usum.jpg", note: "I love the entire series but I am an unapologetic gen 7 defender till' my last breath.", },
       { title: "Hollow Knight", by: "Sutdio Cherry", image: "/favorites/hollowknight.jpg", note: "The Knight was Hollow alright.", },
