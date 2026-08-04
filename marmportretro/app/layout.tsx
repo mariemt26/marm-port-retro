@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "UI/UX designer working on transit, banking and retail interfaces from Osaka.",
+    "Super ultra cool designer working on super ultra cool things.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
