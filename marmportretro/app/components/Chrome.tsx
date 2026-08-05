@@ -52,7 +52,7 @@ export default function Chrome({ children }: { children: ReactNode }) {
     (pathname.startsWith(`${BASE}/projects/`)
       ? [
           "CASE STUDY",
-          "Read the whole thing, the numbers are at the bottom",
+          "Read the whole thing, the pictures are at the bottom",
         ]
       : TICKERS[HOME]);
  
