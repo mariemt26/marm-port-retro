@@ -73,7 +73,6 @@ export default function Chrome({ children }: { children: ReactNode }) {
   return (
     <StaticWipeProvider>
       <div className={`hs-root ${page}`}>
-        <CursorTrail />
         <Ticker items={items} />
         <Masthead />
         <main>{children}</main>
