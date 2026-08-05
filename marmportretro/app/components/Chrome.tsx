@@ -3,7 +3,6 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import Ticker from "./Ticker";
 import Masthead from "./Masthead";
-import CursorTrail from "./CursorTrail";
 import Footer from "./Footer";
 import Radio from "./Radio";
 import { StaticWipeProvider } from "./StaticWipe";
