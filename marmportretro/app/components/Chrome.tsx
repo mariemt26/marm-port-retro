@@ -11,7 +11,6 @@ import { BASE, HOME } from "../config";
 
 const TICKERS: Record<string, string[]> = {
   [HOME]: [
-    "OPEN FOR WORK",
     "WELCOME TO: The Site Where Everything Happens",
     "With your wonderful host, the terribly neurotic yet immensely persistent",
     "Operating from the superior EST Time Zone",
