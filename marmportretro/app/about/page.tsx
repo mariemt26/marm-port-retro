@@ -59,7 +59,7 @@ const TOOLS: { group: string; items: Skill[] }[] = [
 const LANGUAGES: [string, string][] = [
   ["English", "Native"],
   ["Arabic", "Fluent"],
-  ["Algerian Arabic", "Fluent"],
+  ["Darja (yes I consider it seperate)", "Fluent"],
   ["Spanish", "Intermediate"],
   ["Italian", "Introductory"],
   ["Japanese", "Introductory"],
