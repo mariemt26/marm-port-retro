@@ -136,7 +136,7 @@ export const projects: Project[] = [
     title: "KnightRate: For Knights, By Knights",
     label: "KNIGHTRATE",
     color: "#FFC22E",
-    image: "/KnightRateLogo.png",
+    //image: "/KnightRateLogo.png",
     imageAlt: "KnightRate logo",
     blurb:
       "Course reviews for UCF students, with the study resources attached. Ratings tell you a class is hard; KnightRate tells you what got people through it.",

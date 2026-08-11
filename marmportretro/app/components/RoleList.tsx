@@ -8,7 +8,7 @@ import type { Role } from "../data/experience";
  * and fills the page; the rest sit behind it as tabs.
  */
 
-
+/** deterministic file number so server and client agree */
 const fileNo = (seed: string) => {
   let h = 2166136261;
   for (let i = 0; i < seed.length; i++) {
@@ -25,10 +25,10 @@ export default function RoleList({ roles }: { roles: Role[] }) {
   const [open, setOpen] = useState(0);
   const file = ordered[open];
   const club = file.kind === "club";
-  const live = !file.to;
 
   return (
     <div className="cabinet">
+      {/* ── the drawer of tabs ── */}
       <div className="cab-tabs" role="tablist" aria-label="Personnel files">
         {ordered.map((r, i) => (
           <button
@@ -46,13 +46,10 @@ export default function RoleList({ roles }: { roles: Role[] }) {
         ))}
       </div>
 
-
+      {/* ── the open file ── */}
       <article className={`cab-file tone-${TONES[open % TONES.length]}`}>
         <div className="file-stamp-row">
           <span className="file-no">FILE {fileNo(file.org + file.role)}</span>
-          <span className={`file-status ${live ? "live" : ""}`}>
-            {live ? "● ACTIVE" : "CLOSED"}
-          </span>
         </div>
 
         <header className="file-head">

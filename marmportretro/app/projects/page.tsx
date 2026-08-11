@@ -18,7 +18,6 @@ export default function WorkPage() {
       </div>
       <div className="storebar">
         <span className="store-sign">NEW RELEASES</span>
-        <span className="store-note">BE KIND · REWIND</span>
         <span className="store-note dim">MEMBER SINCE 2023</span>
       </div>
 

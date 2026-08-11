@@ -812,10 +812,22 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 }
 
 /* =====================================================
-   FLIP PHONE — contact page
+   MESSAGING PHONE — contact page
+   LG enV shape: opens like a laptop, not left-to-right.
+   Landscape screen deck on top, full QWERTY deck below,
+   hinged along the back edge. Open, it's roughly square;
+   each deck is about 2:1.
+
+   The shell is ONE object — the gradient, border and drop
+   shadow live on .phone and the decks are padding boxes on
+   top of it. Two gradients would mean two light sources.
+
+   Everything inside is sized in cqw against .phone, so the
+   whole handset scales as a single object at any width.
    ===================================================== */
 .contact-only{
   display:flex;flex-direction:column;align-items:center;
+  width:100%;
   gap:clamp(22px,2.4vw,40px);
   padding:clamp(28px,4vw,58px) var(--pad) clamp(40px,5vw,80px);
 }
@@ -829,48 +841,57 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   font-size:clamp(30px,4.4vw,62px);
 }
 
+/* --- the shell --- */
 .phone{
   position:relative;
-  width:clamp(300px,32vw,430px);
+  width:100%;max-width:880px;
+  aspect-ratio:1.6 / 1;            /* wider than tall, full stop */
+  container-type:inline-size;container-name:handset;
   display:flex;flex-direction:column;
+
+  background:linear-gradient(168deg,
+    #FDF4F7 0%, #F6E0E8 24%, #E9BDCE 56%, #D49CB2 82%, #BC839A 100%);
+  border:var(--edge);
+  border-radius:3.2cqw;
+
+  box-shadow:
+    10px 10px 0 var(--ink),
+    inset 0 2px 0 rgba(255,255,255,.8),
+    inset 0 -3px 0 rgba(22,34,74,.16),
+    inset 2px 0 0 rgba(255,255,255,.32);
 }
 
-/* the Smiski sticker, stuck on the bottom-right corner */
-.phone-sticker{
-  position:absolute;
-  right:8px;bottom:8px;z-index:3;
-  width:clamp(24px,2.2vw,34px);
-  height:auto;
-  transform:rotate(-9deg);
-  pointer-events:none;
-  /* white die-cut edge, like a real sticker */
-  filter:
-    drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff)
-    drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff)
-    drop-shadow(2px 3px 2px rgba(22,34,74,.4));
-}
-
-/* --- upper shell --- */
+/* =====================================================
+   UPPER DECK — screen between two speaker slots
+   ===================================================== */
 .phone-lid{
-  background:linear-gradient(158deg,#FBF1F4 0%,#F0D3DE 46%,#D8A9BC 100%);
-  border:var(--edge);border-radius:16px 16px 5px 5px;
-  box-shadow:9px 9px 0 var(--ink);
-  padding:clamp(12px,1.2vw,18px);
+  flex:0 0 57%;min-height:0;overflow:hidden;
+  display:flex;align-items:stretch;gap:1.6cqw;
+  padding:2.6cqw 2.4cqw;
+  position:relative;
 }
-.phone-speaker{
-  width:34%;height:6px;margin:2px auto 11px;
-  border:2px solid var(--ink);border-radius:4px;
-  background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px);
+/* the enV's twin speaker slots, flanking the display */
+.lid-grille{
+  flex:none;width:2.6cqw;align-self:center;height:52%;
+  border:2px solid var(--ink);border-radius:1.4cqw;
+  background:repeating-linear-gradient(to bottom,
+    var(--ink) 0 2px, transparent 2px 5px);
 }
 
-/* --- screen --- */
+/* --- screen, recessed into a black well --- */
 .phone-screen{
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;flex:1;min-width:0;min-height:0;
+  display:flex;flex-direction:column;
   background:#C6DCC5;
-  border:3px solid var(--ink);border-radius:3px;
-  box-shadow:inset 0 2px 9px rgba(0,0,0,.35);
-  padding:8px 9px 9px;
+  border:none;border-radius:.6cqw;
+  margin:.5cqw;
+  padding:1.2cqw 1.4cqw 1.4cqw;
   font-family:var(--pixel);color:#132014;
+  box-shadow:
+    0 0 0 3px #14151A,
+    0 0 0 5px rgba(22,34,74,.4),
+    0 3px 0 5px rgba(22,34,74,.18),
+    inset 0 2px 12px rgba(0,0,0,.42);
 }
 .phone-screen::after{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -880,9 +901,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   background-size:3px 3px;
 }
 .ph-status{
-  display:flex;align-items:center;gap:7px;
-  font-size:9.5px;letter-spacing:.12em;
-  border-bottom:2px solid rgba(19,32,20,.35);padding-bottom:5px;
+  display:flex;align-items:center;gap:1.1cqw;
+  font-size:clamp(8px,1.5cqw,11px);letter-spacing:.12em;
+  border-bottom:2px solid rgba(19,32,20,.35);padding-bottom:.7cqw;
 }
 .ph-bars{display:flex;align-items:flex-end;gap:1.5px}
 .ph-bars i{width:3px;background:#132014;display:block}
@@ -901,17 +922,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 }
 
 .ph-title{
-  font-size:clamp(10px,.75vw,12px);letter-spacing:.16em;
+  font-size:clamp(9px,1.6cqw,13px);letter-spacing:.16em;
   background:var(--ink);color:var(--kiiro);
-  margin:7px -9px 0;padding:5px 9px;
+  margin:.7cqw -1.4cqw 0;padding:.55cqw 1.4cqw;
 }
 .ph-note{
-  font-size:clamp(8.5px,.62vw,10px);letter-spacing:.08em;
-  background:rgba(19,32,20,.14);margin:0 -9px 7px;padding:4px 9px;
+  font-size:clamp(7.5px,1.3cqw,11px);letter-spacing:.08em;
+  background:rgba(19,32,20,.14);margin:0 -1.4cqw .7cqw;padding:.45cqw 1.4cqw;
   border-bottom:2px solid rgba(19,32,20,.3);
 }
 
-.ph-listwrap{display:flex;gap:5px}
+.ph-listwrap{display:flex;gap:.7cqw;flex:1;min-height:0;overflow:hidden}
 .ph-scroll{
   flex:none;width:5px;background:rgba(19,32,20,.18);position:relative;
   border:1px solid rgba(19,32,20,.35);
@@ -920,182 +941,370 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   position:absolute;left:0;right:0;top:0;height:62%;background:rgba(19,32,20,.7);display:block;
 }
 
-.ph-list{list-style:none;display:grid;gap:1px;flex:1;min-width:0}
+.ph-list{
+  list-style:none;display:grid;gap:1px;flex:1;min-width:0;align-content:start;
+  overflow-y:auto;scrollbar-width:none;
+}
+.ph-list::-webkit-scrollbar{display:none}
 .ph-list a{
   position:relative;display:grid;
-  grid-template-columns:auto 1fr auto;align-items:center;gap:8px;
+  grid-template-columns:auto auto 1fr auto;align-items:center;gap:1.4cqw;
   text-decoration:none;color:#132014;
-  padding:clamp(5px,.5vw,8px) 6px clamp(5px,.5vw,8px) 20px;
+  padding:.55cqw .9cqw .55cqw 2.6cqw;
   border-bottom:1px dotted rgba(19,32,20,.35);
 }
 .ph-list a::before{
-  content:"▶";position:absolute;left:4px;font-size:9px;
+  content:"▶";position:absolute;left:.6cqw;font-size:clamp(7px,1.3cqw,10px);
   opacity:0;transform:translateX(-3px);transition:opacity .12s,transform .12s;
 }
-.ph-list a:hover,.ph-list a:focus-visible,.ph-list a.cued{background:#132014;color:#C6DCC5;outline:none}
-.ph-list a:hover::before,.ph-list a:focus-visible::before,.ph-list a.cued::before{opacity:1;transform:translateX(0)}
+.ph-list a:hover,.ph-list a:focus-visible,.ph-list a.sel{background:#132014;color:#C6DCC5;outline:none}
+.ph-list a:hover::before,.ph-list a:focus-visible::before,.ph-list a.sel::before{opacity:1;transform:translateX(0)}
+
+/* the letter chip — this is the key you press on the keyboard below */
 .ph-num{
-  width:15px;height:15px;display:grid;place-items:center;flex:none;
-  border:1.5px solid currentColor;font-size:9px;
+  width:2.6cqw;min-width:14px;aspect-ratio:1;
+  display:grid;place-items:center;flex:none;
+  border:1.5px solid currentColor;
+  font-size:clamp(7px,1.5cqw,11px);
 }
-.ph-text{display:flex;flex-direction:column;gap:1px;min-width:0}
-.ph-ja{font-size:clamp(8.5px,.62vw,10px);letter-spacing:.1em;opacity:.8}
-.ph-val{font-size:clamp(10.5px,.8vw,13px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ph-en{font-size:clamp(8px,.6vw,9.5px);letter-spacing:.14em;opacity:.7}
+.ph-ja{
+  font-size:clamp(7.5px,1.35cqw,11px);letter-spacing:.1em;opacity:.8;
+  flex:none;width:11cqw;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ph-val{
+  font-size:clamp(9px,1.85cqw,15px);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ph-en{font-size:clamp(7px,1.25cqw,10px);letter-spacing:.14em;opacity:.7}
 
 .ph-soft{
   display:flex;justify-content:space-between;
-  font-size:8.5px;letter-spacing:.1em;
-  margin:7px -9px -9px;padding:5px 9px;
+  font-size:clamp(7px,1.25cqw,10px);letter-spacing:.1em;
+  margin:.7cqw -1.4cqw -1.4cqw;padding:.55cqw 1.4cqw;
   background:rgba(19,32,20,.16);border-top:2px solid rgba(19,32,20,.35);
 }
 
-/* --- hinge --- */
-.phone-hinge{display:flex;justify-content:center;margin:-2px 0}
+/* =====================================================
+   HINGE — barrel across the back, knuckles at both ends
+   ===================================================== */
+.phone-hinge{
+  flex:none;
+  display:flex;justify-content:center;margin:0;
+  position:relative;z-index:2;padding:0 6cqw;
+}
 .hinge-bar{
-  width:78%;height:clamp(13px,1.2vw,18px);
-  background:linear-gradient(180deg,#3A3B42 0%,#191A1E 55%,#2C2D33 100%);
-  border:3px solid var(--ink);border-radius:999px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.25);
+  position:relative;width:100%;height:2.1cqw;min-height:11px;
+  background:linear-gradient(180deg,#4A4C55 0%,#2B2C32 28%,#141519 62%,#33343B 100%);
+  border:2.5px solid var(--ink);border-radius:999px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 2px 0 rgba(22,34,74,.3);
 }
+/* the two barrels the lid actually pivots on */
+.hinge-bar::before,.hinge-bar::after{
+  content:"";position:absolute;top:-1.1cqw;bottom:-1.1cqw;
+  width:5.5cqw;border-radius:999px;
+  background:linear-gradient(180deg,#5A5C66 0%,#2E2F36 40%,#17181D 100%);
+  border:2.5px solid var(--ink);
+}
+.hinge-bar::before{left:-4cqw}
+.hinge-bar::after{right:-4cqw}
 
-/* --- lower shell --- */
+/* =====================================================
+   LOWER DECK — function strip + QWERTY
+   ===================================================== */
 .phone-base{
-  background:linear-gradient(158deg,#F5E4EA 0%,#E4C3D0 50%,#CE9BAF 100%);
-  border:var(--edge);border-radius:6px 6px 20px 20px;
-  box-shadow:9px 9px 0 var(--ink);
-  padding:clamp(14px,1.4vw,22px) clamp(13px,1.3vw,20px) clamp(16px,1.6vw,24px);
-  display:flex;flex-direction:column;gap:clamp(9px,.9vw,14px);
-  position:relative;
+  position:relative;flex:1;min-height:0;
+  padding:2cqw 2.4cqw 2.8cqw;
+  display:flex;flex-direction:column;gap:1.2cqw;
 }
 
-/* shared key face */
-.softkey,.callkey,.midkey,.pkey,.dpad-ok{
-  background:linear-gradient(180deg,#3C3D44 0%,#26272C 48%,#17181C 100%);
-  border:2px solid #0C0D10;
-  color:var(--kinari);
-  box-shadow:0 2px 0 rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.16);
+/* --- the strip under the screen: soft keys, OK, send/end --- */
+.deck-top{flex:none;display:flex;align-items:center;gap:1.2cqw}
+.softkey,.okkey,.callkey{
+  border:2px solid #0A0B0E;color:var(--kinari);
   display:grid;place-items:center;
-  font-family:var(--pixel);
-  transition:background .12s ease,transform .1s ease,box-shadow .1s ease;
+  font-family:var(--pixel);line-height:1;
+  height:3.4cqw;min-height:18px;
+  border-radius:999px;cursor:pointer;text-decoration:none;
+  background:linear-gradient(180deg,#3F4048 0%,#26272C 46%,#141519 100%);
+  box-shadow:0 2px 0 rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.18);
+  transition:filter .12s ease,transform .1s ease,box-shadow .1s ease;
+  font-size:clamp(7px,1.35cqw,11px);letter-spacing:.14em;
 }
+.softkey{flex:1}
+.softkey:hover,.okkey:hover,.callkey:hover{filter:brightness(1.35)}
+.softkey:active,.okkey:active,.callkey:active{transform:translateY(2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+/* OK is the one coloured control on the deck — the enV's red centre key */
+.okkey{
+  flex:none;width:13cqw;
+  background:linear-gradient(180deg,#FF6B52 0%,var(--shu) 48%,#C42E1A 100%);
+  border-color:var(--ink);color:var(--kinari);
+  letter-spacing:.2em;
+}
+.callkey{flex:none;width:7cqw;font-size:clamp(9px,1.7cqw,14px);letter-spacing:0}
+.callkey.send{color:#5FD98D}
+.callkey.end{color:#FF7A7A}
+.callkey.end:hover{filter:brightness(1.35)}
 
-/* --- soft keys + D-pad + call keys --- */
-.pad-nav{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  grid-template-rows:auto auto;
-  gap:clamp(6px,.6vw,10px) clamp(8px,.8vw,14px);
-  align-items:center;justify-items:center;
+/* --- the keyboard --- */
+.qwerty{
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;gap:.6cqw;
+  background:#0A0B0E;border:2px solid #0A0B0E;border-radius:1.6cqw;
+  padding:.6cqw;
+  box-shadow:0 3px 0 rgba(22,34,74,.32),inset 0 1px 0 rgba(255,255,255,.06);
 }
-.softkey{
-  width:100%;height:clamp(20px,1.9vw,28px);border-radius:999px;
-  font-size:clamp(11px,1vw,15px);line-height:1;
-}
-.softkey.left{grid-area:1/1}
-.softkey.right{grid-area:1/3}
-.dpad{
-  grid-area:1/2/3/3;position:relative;
-  width:clamp(72px,7vw,98px);aspect-ratio:1;
-  display:grid;place-items:center;
-}
-/* invisible hit areas on the ring */
-.dpad-up,.dpad-down{
-  position:absolute;left:18%;right:18%;height:32%;
-  border:none;background:none;cursor:pointer;padding:0;
-  border-radius:999px;
-}
-.dpad-up{top:0}
-.dpad-down{bottom:0}
-.dpad-up:hover,.dpad-down:hover{background:rgba(255,255,255,.12)}
-.dpad-up:active,.dpad-down:active{background:rgba(0,0,0,.25)}
-.dpad-ring{
-  position:absolute;inset:0;border-radius:50%;
-  background:
-    conic-gradient(from 45deg,#43444B,#2A2B31,#43444B,#2A2B31,#43444B);
-  border:2px solid #0C0D10;
-  box-shadow:0 3px 0 rgba(0,0,0,.5),inset 0 0 0 3px rgba(226,180,196,.55);
-}
-.dpad-ok{
-  position:relative;width:46%;aspect-ratio:1;border-radius:50%;
-  font-size:clamp(10px,.95vw,13px);letter-spacing:.06em;cursor:pointer;
-  box-shadow:0 2px 0 rgba(0,0,0,.6),inset 0 0 0 2px rgba(226,180,196,.45);
-}
-.dpad-ok:hover{background:linear-gradient(180deg,#4C4D55,#2E2F35 48%,#1D1E22)}
-.dpad-ok:active{transform:translateY(2px);box-shadow:inset 0 0 0 2px rgba(226,180,196,.45)}
-.callkey{
-  width:clamp(34px,3.2vw,46px);height:clamp(20px,1.9vw,28px);border-radius:999px;
-  font-size:clamp(11px,1vw,14px);
-}
-.callkey.send{grid-area:2/1;color:#4BD07E}
-.callkey.end{grid-area:2/3;color:#FF6A6A;transform:rotate(135deg)}
+.qrow{flex:1;min-height:0;display:flex;gap:.6cqw}
+/* rows 2 and 3 sit inboard, the way a real thumb keyboard staggers */
+.qrow.r2{padding-left:1.2cqw}
+.qrow.r3{padding-right:1.2cqw}
 
-/* --- star / mail / back --- */
-.pad-mid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,.6vw,10px)}
-.midkey{
-  height:clamp(20px,1.9vw,28px);border-radius:999px;
-  font-size:clamp(11px,1vw,14px);
+.qkey{
+  flex:var(--w,1);min-width:0;padding:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.2cqw;border:none;border-radius:.7cqw;
+  background:linear-gradient(180deg,#3F4048 0%,#26272C 46%,#141519 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15);
+  color:rgba(251,247,238,.62);
+  font:inherit;cursor:default;
+  transition:filter .12s ease,transform .1s ease,background .12s ease;
 }
-
-/* --- number pad --- */
-.phone-keys{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:clamp(6px,.6vw,10px);width:100%;
-}
-.pkey{
-  grid-auto-flow:column;
-  display:flex;align-items:center;justify-content:center;
-  gap:clamp(4px,.45vw,7px);
-  padding:clamp(6px,.6vw,10px) 0;
-  border-radius:999px;
-  cursor:pointer;font:inherit;
-}
-.pkey.dead{cursor:default;opacity:.72}
-/* physical press — travels down and loses its shadow */
-.pkey.press,.dpad-ok.press{
-  transform:translateY(3px);
-  box-shadow:0 0 0 rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.16);
-  filter:brightness(1.25);
-}
-.pkey:not(.dead):hover{filter:brightness(1.35)}
-.dpad-ok{cursor:pointer;font:inherit;border-radius:50%}
-.pkey b{
+.qkey b{
   font-family:var(--display);font-weight:900;
-  font-size:clamp(15px,1.35vw,21px);line-height:1;
+  font-size:clamp(9px,2.35cqw,19px);line-height:1;
+  color:rgba(251,247,238,.62);
 }
-.pkey-sub{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
-.pkey-sub i{
-  font-family:var(--pixel);font-style:normal;
-  font-size:clamp(7px,.58vw,9px);letter-spacing:.02em;
-  color:rgba(251,247,238,.82);
-}
-.pkey-sub i.kana{color:rgba(251,247,238,.5);font-size:clamp(6.5px,.52vw,8px)}
-.pkey.lit{
-  background:linear-gradient(180deg,#FFD661,#FFC22E 50%,#E8A50C);
-  border-color:var(--ink);color:var(--ink);
-  transform:translateY(2px);box-shadow:0 0 0 rgba(0,0,0,.55);
-}
-.pkey.lit b{color:var(--ink)}
-.pkey.lit .pkey-sub i{color:rgba(22,34,74,.8)}
-.pkey.lit .pkey-sub i.kana{color:rgba(22,34,74,.55)}
+.qkey i{display:none}
+/* the mat's outer corners follow the plate, not each key */
+.qrow:first-child .qkey:first-child{border-top-left-radius:1.2cqw}
+.qrow:first-child .qkey:last-child{border-top-right-radius:1.2cqw}
+.qrow:last-child .qkey:first-child{border-bottom-left-radius:1.2cqw}
+.qrow:last-child .qkey:last-child{border-bottom-right-radius:1.2cqw}
 
-/* the key whose entry is currently selected stays lit */
-.pkey.sel{
-  background:linear-gradient(180deg,#FFD661,#FFC22E 50%,#E8A50C);
-  border-color:var(--ink);color:var(--ink);
+/* a key that opens something: lighter cap, and a marigold pip under
+   the letter. The screen already names the destination — printing it
+   on the key too was unreadable at this size. */
+.qkey.live{
+  cursor:pointer;color:var(--kinari);
+  background:linear-gradient(180deg,#585A64 0%,#3A3B43 46%,#22232A 100%);
 }
-.pkey.sel b{color:var(--ink)}
-.pkey.sel .pkey-sub i{color:rgba(22,34,74,.8)}
-.pkey:focus-visible{outline:3px solid var(--kiiro);outline-offset:2px}
+.qkey.live b{color:var(--kinari)}
+.qkey.live::after{
+  content:"";display:block;
+  width:.9cqw;height:.9cqw;min-width:3px;min-height:3px;
+  border-radius:50%;background:var(--kiiro);
+}
+.qkey.live:hover{filter:brightness(1.45)}
+.qkey.live:active,.qkey.press{transform:translateY(2px);filter:brightness(1.3)}
+.qkey:focus-visible{outline:3px solid var(--kiiro);outline-offset:-3px}
 
+/* lit / selected: the key backlights, it does not move —
+   a key inside a mat cannot travel on its own */
+.qkey.lit,.qkey.sel{
+  background:linear-gradient(180deg,#FFD661,#FFC22E 52%,#E8A50C);
+  transform:none;
+}
+.qkey.lit b,.qkey.sel b{color:var(--ink)}
+.qkey.lit::after,.qkey.sel::after{background:var(--ink)}
 
+/* --- the numeric keypad: hidden on desktop, swapped in on mobile --- */
+.dialpad{display:none}
+.dkey{
+  flex:1;min-width:0;padding:0;
+  display:flex;align-items:center;justify-content:center;gap:1.4cqw;
+  border:none;border-radius:2cqw;
+  background:linear-gradient(180deg,#3F4048 0%,#26272C 46%,#141519 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15);
+  color:rgba(251,247,238,.62);
+  font:inherit;cursor:default;
+  transition:filter .12s ease,transform .1s ease,background .12s ease;
+}
+.dkey b{
+  font-family:var(--display);font-weight:900;line-height:1;
+  font-size:clamp(15px,5.2cqw,26px);color:rgba(251,247,238,.62);
+}
+.dkey i{
+  font-style:normal;font-family:var(--pixel);line-height:1.1;
+  font-size:clamp(6px,2.1cqw,10px);letter-spacing:.04em;
+  color:rgba(251,247,238,.4);
+}
+.dkey.live{
+  cursor:pointer;color:var(--kinari);
+  background:linear-gradient(180deg,#585A64 0%,#3A3B43 46%,#22232A 100%);
+}
+.dkey.live b{color:var(--kinari)}
+.dkey.live i{color:rgba(251,247,238,.7)}
+.dkey.live:hover{filter:brightness(1.45)}
+.dkey.live:active,.dkey.press{transform:translateY(2px);filter:brightness(1.3)}
+.dkey.lit,.dkey.sel{background:linear-gradient(180deg,#FFD661,#FFC22E 52%,#E8A50C)}
+.dkey.lit b,.dkey.sel b{color:var(--ink)}
+.dkey.lit i,.dkey.sel i{color:rgba(22,34,74,.75)}
+.dkey:focus-visible{outline:3px solid var(--kiiro);outline-offset:-3px}
+
+/* the screen's chip shows the letter on desktop, the digit on mobile */
+.chip-num{display:none}
+
+/* moulded brand badge */
+.phone-badge{
+  position:absolute;left:2.6cqw;bottom:1cqw;
+  font-family:var(--pixel);font-size:clamp(6.5px,1.15cqw,9px);
+  letter-spacing:.26em;color:rgba(22,34,74,.32);pointer-events:none;
+}
+
+/* =====================================================
+   STICKER SLOTS — drop your own art in
+   sizes and angles are deliberately uneven
+   ===================================================== */
+.slot{position:absolute;z-index:4;pointer-events:none;line-height:0}
+.slot img{
+  width:100%;height:auto;display:block;
+  /* white die-cut edge, like a real sticker */
+  filter:
+    drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff)
+    drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff)
+    drop-shadow(2px 3px 2px rgba(22,34,74,.38));
+}
+.slot.a{width:6.2cqw;top:1.4cqw;right:1.6cqw;transform:rotate(-11deg)}
+.slot.b{width:4.6cqw;bottom:1.2cqw;right:4cqw;transform:rotate(7deg)}
+.slot.c{width:5.4cqw;top:52%;left:1.2cqw;transform:rotate(-4deg)}
+
+/* =====================================================
+   CHARM STRAP — cord, split ring, your own art
+   Tune per charm from the JSX:
+     --len  how far it dangles   --size  how big it hangs
+     --tilt resting angle        --swing sway duration
+   ===================================================== */
 .phone-strap{
-  position:absolute;top:-2px;right:12px;width:9px;height:9px;
-  border:3px solid var(--ink);border-radius:50%;background:var(--mizu);
+  position:absolute;z-index:5;
+  right:clamp(16px,1.8vw,28px);top:calc(100% - 4px);
+  display:flex;gap:clamp(9px,1vw,15px);align-items:flex-start;
+  pointer-events:none;
+}
+.charm{
+  --len:clamp(20px,2.1vw,32px);
+  --size:clamp(26px,2.7vw,40px);
+  --tilt:0deg;
+  --swing:3.4s;
+  display:flex;flex-direction:column;align-items:center;
+  transform-origin:top center;
+  animation:swing var(--swing) ease-in-out infinite;
+}
+.charm-cord{
+  width:2.5px;height:var(--len);
+  background:linear-gradient(90deg,var(--ink) 0 40%,rgba(255,255,255,.35) 40% 60%,var(--ink) 60%);
+  border-radius:2px;
+}
+/* the split ring is what makes it read as a charm and not
+   a picture floating on a string */
+.charm-ring{
+  width:clamp(7px,.75vw,11px);aspect-ratio:1;
+  margin:-1px 0 -2px;
+  border:2.5px solid var(--ink);border-radius:50%;
+  background:transparent;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+}
+.charm-art{
+  display:block;width:var(--size);height:auto;
+  transform:rotate(var(--tilt));
+  filter:drop-shadow(2px 3px 2px rgba(22,34,74,.4));
+}
+@keyframes swing{
+  0%,100%{transform:rotate(-8deg)}
+  50%{transform:rotate(8deg)}
 }
 
+@media (prefers-reduced-motion:reduce){
+  .charm{animation:none;transform:rotate(-3deg)}
+}
+
+/* --- small screens: same handset, just smaller ---
+   Everything above is in cqw, so the whole thing scales as
+   one object. Only the parts sized off the viewport need help. */
+/* =====================================================
+   SMALL SCREENS — the handset becomes a vertical flip
+   The enV's landscape geometry and its ten-column QWERTY
+   both stop working below ~620px, so the whole thing
+   reshapes: portrait screen deck over a keypad, and the
+   keyboard collapses to just the eight keys that do
+   something. Same DOM — the rows go display:contents and
+   the live keys reflow into a 3-wide grid in ENTRIES
+   order via --o.
+   ===================================================== */
 @media (max-width:620px){
-  .phone{width:min(360px,100%)}
+  .phone{
+    max-width:400px;
+    aspect-ratio:auto;              /* portrait, driven by the decks */
+    border-radius:5cqw;
+  }
+
+  /* ---- upper half ---- */
+  .phone-lid{
+    flex:none;
+    flex-direction:column;gap:0;
+    padding:4cqw 4cqw 3.4cqw;
+  }
+  /* the twin side slots are a landscape detail — a vertical flip
+     has one earpiece grille across the top instead */
+  .lid-grille{display:none}
+  .phone-lid::before{
+    content:"";display:block;flex:none;
+    width:34%;height:1.7cqw;min-height:5px;margin:0 auto 3cqw;
+    border:2px solid var(--ink);border-radius:4px;
+    background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px);
+  }
+  .phone-screen{flex:none;aspect-ratio:4 / 3;margin:0;padding:2.4cqw 2.6cqw 2.6cqw}
+  .ph-status{gap:2cqw;font-size:clamp(8px,2.6cqw,12px);padding-bottom:1.4cqw}
+  .ph-title{font-size:clamp(9px,3cqw,14px);margin:1.6cqw -2.6cqw 0;padding:1.2cqw 2.6cqw}
+  .ph-note{font-size:clamp(7.5px,2.4cqw,11px);margin:0 -2.6cqw 1.4cqw;padding:1cqw 2.6cqw}
+  .ph-soft{font-size:clamp(7px,2.3cqw,10px);margin:1.4cqw -2.6cqw -2.6cqw;padding:1.2cqw 2.6cqw}
+  .ph-list a{gap:2.6cqw;padding:1.4cqw 1.6cqw 1.4cqw 5cqw}
+  .ph-list a::before{left:1.2cqw;font-size:clamp(7px,2.4cqw,11px)}
+  .ph-num{width:5cqw;font-size:clamp(7px,2.8cqw,12px)}
+  .ph-ja{width:22cqw;font-size:clamp(7.5px,2.5cqw,11px)}
+  .ph-val{font-size:clamp(9px,3.4cqw,15px)}
+  .ph-en{display:none}            /* the row is too narrow to say it twice */
+
+  /* ---- hinge ---- */
+  .phone-hinge{padding:0 7cqw}
+  .hinge-bar{height:2.6cqw;min-height:8px}
+  .hinge-bar::before,.hinge-bar::after{display:none}
+
+  /* ---- lower half: keypad, not keyboard ---- */
+  .phone-base{flex:none;padding:3.4cqw 4cqw 5cqw;gap:2.6cqw}
+  .deck-top{
+    display:grid;grid-template-columns:1fr auto 1fr;
+    gap:1.8cqw 2.4cqw;align-items:center;
+  }
+  .softkey,.okkey,.callkey{height:6.2cqw;font-size:clamp(7px,2.3cqw,11px)}
+  .deck-top > :nth-child(1){grid-area:1/1}     /* MENU */
+  .okkey{grid-area:1/2;width:24cqw}
+  .deck-top > :nth-child(3){grid-area:1/3}     /* BACK */
+  .callkey.send{grid-area:2/1;width:100%;font-size:clamp(9px,3cqw,14px)}
+  .callkey.end{grid-area:2/3;width:100%;font-size:clamp(9px,3cqw,14px)}
+
+  .qwerty{display:none}
+  .dialpad{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1cqw;padding:1cqw;
+    background:#0A0B0E;border:2px solid #0A0B0E;border-radius:3.4cqw;
+    box-shadow:0 3px 0 rgba(22,34,74,.32),inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .dkey{aspect-ratio:2.1 / 1;gap:1.1cqw}
+  /* the mat's outer corners follow the plate, not each key */
+  .dkey:nth-child(1){border-top-left-radius:3cqw}
+  .dkey:nth-child(3){border-top-right-radius:3cqw}
+  .dkey:nth-child(10){border-bottom-left-radius:3cqw}
+  .dkey:nth-child(12){border-bottom-right-radius:3cqw}
+
+  /* the chip beside each contact switches to its dial digit */
+  .chip-key{display:none}
+  .chip-num{display:block}
+
+  .phone-badge{left:4cqw;bottom:1.6cqw;font-size:clamp(6.5px,2.2cqw,10px)}
+  .slot.a{width:11cqw;top:2.4cqw;right:2.6cqw}
+  .slot.b{width:8cqw;bottom:2cqw;right:7cqw}
+  .slot.c{display:none}
+  .phone-strap{right:14px}
 }
 
 /* =====================================================
@@ -1508,7 +1717,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     var(--kinari);
   border:3px solid var(--ink);
   box-shadow:10px 10px 0 var(--ink);
-  max-width:min(560px,100%);
+  width:100%;max-width:680px;
+}
+/* the mat has to grow with the landscape handset, and leave room
+   for the charms hanging off the bottom edge */
+@media (min-width:820px){
+  .deskmat{max-width:1040px;padding-bottom:clamp(56px,5vw,86px)}
+}
+@media (min-width:1200px){
+  .deskmat{max-width:1040px}
 }
 .mat-label{
   font-family:var(--pixel);font-size:clamp(10px,.85vw,12.5px);
@@ -1740,7 +1957,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 }
 /* =====================================================
    PLATES + LIGHTBOX (case study screenshots)
-   Paste at the end of app/styles.css
    ===================================================== */
 .plates{
   display:grid;
@@ -1869,7 +2085,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 }
 /* =====================================================
    SPECIAL MENU + PUZZLE (about page)
-   Paste at the end of app/styles.css
    ===================================================== */
 
 /* --- dropdown --- */
@@ -2004,7 +2219,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 }
 /* =====================================================
    FAVORITES (about page) — Finder window, icon view
-   Paste at the end of app/styles.css
    ===================================================== */
 .favs{display:flex;flex-direction:column;gap:0}
 
@@ -2445,13 +2659,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 .hs-root .dt-screen ::selection,
 .hs-root .lb-bar ::selection{background:var(--shu);color:var(--kinari)}
 
-/* the trail canvas — full-bleed, never in the way */
-.cursor-trail{
+/* the spark canvas — full-bleed, never in the way */
+.click-sparks{
   position:fixed;inset:0;z-index:9998;
   width:100%;height:100%;
   pointer-events:none;
-}
-
-@media (pointer:coarse){
-  .cursor-trail{display:none}
 }
