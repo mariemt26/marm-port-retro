@@ -21,7 +21,7 @@ type Entry = {
 const ENTRIES: Entry[] = [
   { key: "E", num: "1", ja: "Email", en: "EMAIL", value: SITE.email, href: `mailto:${SITE.email}` },
   { key: "L", num: "2", ja: "Professional", en: "LINKEDIN", value: "/in/mariemtouati", href: "https://www.linkedin.com/in/mariem-touati-297894216/", external: true },
-  { key: "G", num: "3", ja: "Code", en: "GITHUB", value: "github.com/mariemtouati", href: "https://github.com/mariemt26", external: true },
+  { key: "G", num: "3", ja: "Code", en: "GITHUB", value: "github.com/mariemt26", href: "https://github.com/mariemt26", external: true },
   { key: "P", num: "4", ja: "Visual boards", en: "PINTEREST", value: "@mariemtouati", href: "#", external: true },
   { key: "S", num: "5", ja: "Reading", en: "STORYGRAPH", value: "/marmalade_toast", href: "https://app.thestorygraph.com/profile/marmalade_toast", external: true },
   { key: "I", num: "6", ja: "Social", en: "INSTAGRAM", value: "@marmalade.studios", href: "#", external: true },
