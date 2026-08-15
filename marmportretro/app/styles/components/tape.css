@@ -1,0 +1,163 @@
+/* =====================================================
+   VHS CASSETTE (work page)
+   Black shell, label sticker, reel windows, hinged flap.
+   ===================================================== */
+.shelf{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));
+  gap:clamp(20px,2.2vw,38px);
+}
+
+.tape{
+  position:relative;display:flex;flex-direction:column;
+  text-decoration:none;color:var(--kinari);
+  background:
+    linear-gradient(100deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 30%),
+    #191A1E;
+  border:var(--edge);border-radius:5px;
+  box-shadow:var(--drop);
+  padding:clamp(13px,1.2vw,20px) clamp(13px,1.2vw,20px) 0;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+@media (min-width:760px){ .tape{aspect-ratio:1.74} }
+.tape:hover,.tape:focus-visible{
+  transform:translate(-5px,-5px);
+  box-shadow:14px 14px 0 var(--shu);
+}
+
+/* --- the paper label stuck across the top --- */
+.tape-label{
+  flex:1;min-height:0;display:flex;flex-direction:column;
+  background:var(--kinari);color:var(--ink);
+  border:2px solid #000;box-shadow:0 2px 0 rgba(0,0,0,.5);
+}
+.label-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  background:var(--case,#5BC4B4);border-bottom:2px solid #000;
+  padding:clamp(6px,.7vw,11px) clamp(10px,1vw,16px);
+}
+.label-kanji{
+  font-family:var(--display);font-weight:900;letter-spacing:-.02em;
+  font-size:clamp(17px,1.5vw,24px);color:var(--kinari);
+  text-shadow:1.5px 1.5px 0 rgba(22,34,74,.55);
+}
+.label-sku{
+  font-family:var(--pixel);font-size:clamp(9.5px,.8vw,12px);
+  letter-spacing:.16em;color:rgba(22,34,74,.85);
+}
+.label-body{
+  padding:clamp(11px,1.1vw,17px) clamp(12px,1.1vw,18px) 0;
+  flex:1;min-height:0;
+}
+/* with a thumbnail: image left, copy right */
+.label-body.has-thumb{
+  display:flex;gap:clamp(11px,1.1vw,17px);align-items:flex-start;
+}
+.label-copy{display:block;min-width:0;flex:1}
+
+/* the thumbnail, stuck on like a pasted-in print */
+.label-thumb{
+  flex:none;display:block;position:relative;
+  width:clamp(66px,7.5vw,104px);
+  aspect-ratio:1;
+  background:var(--kinari);
+  border:2px solid var(--ink);
+  box-shadow:3px 3px 0 rgba(22,34,74,.55);
+  transform:rotate(-2deg);
+  overflow:hidden;
+}
+.label-thumb img{
+  width:100%;height:100%;object-fit:contain;
+  display:block;padding:5px;
+}
+/* a little tape across the corner */
+.label-thumb::after{
+  content:"";position:absolute;
+  top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  width:46%;height:13px;
+  background:rgba(251,247,238,.55);
+  border:1px solid rgba(22,34,74,.35);
+}
+.tape:hover .label-thumb{transform:rotate(-2deg) translateY(-2px)}
+.label-body h3{
+  font-family:var(--display);font-weight:700;letter-spacing:-.025em;
+  font-size:clamp(18px,1.6vw,26px);line-height:1.15;
+}
+.label-body p{
+  font-size:clamp(13px,1vw,15.5px);color:rgba(22,34,74,.76);
+  margin-top:6px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.label-body.has-thumb p{-webkit-line-clamp:4}
+
+@media (max-width:560px){
+  .label-body.has-thumb{display:block}
+  .label-thumb{float:left;margin:0 12px 8px 0;width:74px}
+}
+.label-foot{
+  display:flex;flex-wrap:wrap;gap:6px 18px;
+  padding:clamp(9px,.9vw,14px) clamp(12px,1.1vw,18px);
+  border-top:2px dashed rgba(22,34,74,.25);margin-top:auto;
+  font-family:var(--pixel);font-size:clamp(10px,.82vw,12px);letter-spacing:.08em;
+}
+.label-foot b{color:var(--shu)}
+
+/* --- exposed shell below the label --- */
+.tape-under{
+  display:flex;align-items:center;gap:clamp(10px,1vw,18px);
+  padding:clamp(10px,1vw,16px) 2px;
+}
+.reels{display:flex;gap:clamp(7px,.7vw,11px);flex:none}
+.reels span{
+  width:clamp(26px,2.4vw,40px);height:clamp(26px,2.4vw,40px);border-radius:50%;
+  background:
+    radial-gradient(circle,#0A0B0D 0 26%,#3A3A3E 27% 34%,#5E5A52 35% 100%);
+  border:2px solid #000;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.9);
+  display:block;
+}
+.tape:hover .reels span{animation:spool 2s linear infinite}
+.tape:hover .reels span:last-child{animation-duration:3.1s}
+@keyframes spool{to{transform:rotate(360deg)}}
+
+.tape-tags{display:flex;flex-wrap:wrap;gap:5px}
+.tape-tags i{
+  font-family:var(--pixel);font-style:normal;letter-spacing:.1em;
+  font-size:clamp(9.5px,.78vw,11.5px);
+  border:1.5px solid rgba(251,247,238,.45);color:rgba(251,247,238,.72);
+  padding:2px 7px;
+}
+.tape-tags .play{border-color:var(--kiiro);color:var(--kiiro)}
+.shell-mark{
+  margin-left:auto;font-family:var(--display);font-weight:900;
+  font-size:clamp(13px,1.1vw,18px);letter-spacing:.16em;
+  color:rgba(251,247,238,.22);flex:none;
+}
+
+/* --- hinged front flap along the bottom edge --- */
+.tape-flap{
+  height:clamp(14px,1.3vw,22px);margin:0 calc(-1 * clamp(13px,1.2vw,20px));
+  background:linear-gradient(180deg,#26272C 0%,#141519 100%);
+  border-top:2px solid #000;
+  border-radius:0 0 3px 3px;position:relative;
+}
+.tape-flap::after{
+  content:"";position:absolute;left:50%;transform:translateX(-50%);
+  top:4px;width:22%;height:3px;background:rgba(0,0,0,.75);border-radius:2px;
+}
+
+/* --- shell screws --- */
+.screw{
+  position:absolute;width:6px;height:6px;border-radius:50%;
+  background:#0B0C0E;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
+}
+.screw.tl{top:5px;left:5px}
+.screw.tr{top:5px;right:5px}
+
+@media (max-width:520px){
+  .tape-tags{display:none}
+  .shell-mark{margin-left:auto}
+}
+
+/* =====================================================

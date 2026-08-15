@@ -1,0 +1,59 @@
+/* =====================================================
+   SCRATCHPAD (about page)
+   ===================================================== */
+.paint-hint{
+  font-family:var(--pixel);font-size:clamp(10px,.82vw,12px);
+  letter-spacing:.16em;color:var(--shu);margin-bottom:11px;
+}
+.paint{display:flex;flex-direction:column;gap:11px}
+
+/* --- tool strip --- */
+.paint-tools{
+  display:flex;flex-wrap:wrap;gap:clamp(12px,1.4vw,22px);
+  border:2px solid var(--ink);background:var(--kinari);
+  padding:clamp(9px,1vw,14px);
+}
+.paint-group{display:flex;flex-direction:column;gap:6px}
+.paint-label{
+  font-family:var(--pixel);font-size:clamp(8.5px,.7vw,10.5px);
+  letter-spacing:.2em;color:rgba(22,34,74,.65);
+}
+.paint-sizes,.paint-swatches,.paint-actions{display:flex;gap:5px;flex-wrap:wrap}
+
+.size-btn{
+  cursor:pointer;display:grid;place-items:center;
+  width:28px;height:28px;padding:0;
+  border:2px solid var(--ink);background:#fff;
+  box-shadow:2px 2px 0 var(--ink);
+}
+.size-btn span{display:block;background:var(--ink);border-radius:50%}
+.size-btn.on{background:var(--kiiro)}
+.size-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+.swatch-btn{
+  cursor:pointer;width:28px;height:28px;padding:0;
+  border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
+}
+.swatch-btn.on{outline:3px solid var(--shu);outline-offset:2px}
+.swatch-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+.mac-btn.wide{
+  width:auto;height:28px;padding:0 11px;
+  font-family:var(--pixel);font-size:clamp(9.5px,.78vw,11.5px);letter-spacing:.1em;
+}
+.mac-btn.wide.on{background:var(--shu);color:var(--kinari)}
+
+/* --- canvas --- */
+.paint-canvas{
+  width:100%;height:auto;display:block;
+  aspect-ratio:640/420;
+  background:#fff;border:2px solid var(--ink);
+  cursor:crosshair;touch-action:none;
+}
+
+.paint-status{
+  display:flex;justify-content:space-between;gap:12px;
+  padding-top:8px;border-top:2px solid rgba(22,34,74,.2);
+  font-family:var(--pixel);font-size:clamp(10px,.8vw,12px);
+  letter-spacing:.1em;color:rgba(22,34,74,.7);
+}

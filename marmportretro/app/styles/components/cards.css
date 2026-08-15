@@ -1,0 +1,57 @@
+/* ============ WORK CARDS ============ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:22px}
+
+.card{
+  background:var(--kinari);border:var(--edge);box-shadow:var(--drop);
+  padding:16px;display:flex;flex-direction:column;gap:10px;
+  text-decoration:none;color:var(--ink);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.card:hover,.card:focus-within{transform:translate(-4px,-4px) rotate(-.5deg);box-shadow:12px 12px 0 var(--shu)}
+.swatch{
+  aspect-ratio:16/10;border:2px solid var(--ink);position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;padding:12px;
+}
+
+.swatch::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(22,34,74,.30) 1.6px,transparent 1.7px);
+  background-size:8px 8px;opacity:0;transition:opacity .25s;
+}
+
+.card:hover .swatch::before{opacity:1}
+
+.swatch b{
+  position:relative;font-family:var(--display);font-weight:900;font-size:24px;
+  letter-spacing:-.04em;color:var(--kinari);text-shadow:2px 2px 0 rgba(22,34,74,.5);
+}
+
+.sku{font-family:var(--pixel);font-size:11px;letter-spacing:.16em;color:var(--shu)}
+.card h3{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em}
+.card p{font-size:13.5px;color:rgba(22,34,74,.78)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tags i{font-family:var(--pixel);font-style:normal;font-size:10.5px;letter-spacing:.1em;border:1.5px solid var(--ink);padding:2px 7px}
+.metric{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--pixel);font-size:11px;letter-spacing:.08em;color:var(--ink)}
+.metric b{color:var(--shu)}
+
+/* ============ SPEC SHEET ============ */
+.spec{background:var(--kinari);border:var(--edge);box-shadow:var(--drop);margin-bottom:34px}
+.spec dl{display:grid;grid-template-columns:clamp(200px,16vw,260px) 1fr}
+.spec dt,.spec dd{padding:14px 18px;border-bottom:2px solid rgba(22,34,74,.18)}
+.spec dt{font-family:var(--pixel);font-size:12px;letter-spacing:.14em;background:rgba(205,230,222,.5);border-right:2px solid rgba(22,34,74,.18)}
+.spec dd{font-size:clamp(14.5px,1.05vw,19px)}
+.spec dl>div{display:contents}
+.spec dl>div:last-child>dt,.spec dl>div:last-child>dd{border-bottom:none}
+.spec dl>:nth-last-child(-n+2):not(div){border-bottom:none}
+
+/* case study back link */
+.backlink{font-family:var(--pixel);font-size:12px;letter-spacing:.14em;color:var(--shu);text-decoration:none}
+.backlink:hover{text-decoration:underline}
+
+/* ============ PROCESS STEPS ============ */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px}
+.step{background:var(--kinari);border:var(--edge);box-shadow:var(--drop);padding:18px}
+.step .n{font-family:var(--pixel);font-size:12px;letter-spacing:.2em;color:var(--shu)}
+.step h3{font-family:var(--display);font-weight:700;font-size:clamp(17px,1.4vw,21px);margin:6px 0 8px}
+.step p{font-size:clamp(13.5px,1vw,15.5px)}

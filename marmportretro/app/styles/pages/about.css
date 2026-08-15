@@ -1,0 +1,223 @@
+/* =====================================================
+   DESKTOP (about page) — System 7, light and airy yet retro
+   ===================================================== */
+.desk{padding-bottom:clamp(50px,6vw,90px)}
+
+/* --- menu bar --- */
+.menubar{
+  display:flex;align-items:center;gap:clamp(14px,1.6vw,26px);
+  background:var(--kinari);border:2px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  padding:6px clamp(12px,1.2vw,18px);
+  font-family:var(--pixel);font-size:clamp(11px,.9vw,13.5px);letter-spacing:.1em;
+  margin-bottom:clamp(22px,2.4vw,40px);
+}
+
+.menubar .apple{color:var(--shu);font-size:1.15em}
+.menu-item{opacity:.8}
+.menu-clock{margin-left:auto;color:var(--shu)}
+
+/* --- layout --- */
+.desk-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(20px,2.2vw,38px);
+  align-items:start;
+}
+
+
+.desk-col{
+  display:flex;flex-direction:column;
+  gap:clamp(20px,2.2vw,38px);
+  min-width:0;
+}
+.icons{grid-column:1/-1}
+
+/* --- window chrome --- */
+.macwin{
+  background:#fff;
+  border:2px solid var(--ink);
+  box-shadow:7px 7px 0 var(--ink);
+  transform:rotate(var(--tilt,0deg));
+}
+
+.mac-bar{
+  display:flex;align-items:center;gap:9px;
+  border-bottom:2px solid var(--ink);
+  padding:6px 9px;
+  /* the System 7 pinstripe */
+  background:repeating-linear-gradient(to bottom,
+    var(--ink) 0 1px, transparent 1px 3px);
+}
+
+.mac-close,.mac-zoom{
+  width:13px;height:13px;flex:none;
+  border:2px solid var(--ink);background:#fff;
+}
+
+.mac-zoom{margin-left:auto;box-shadow:inset -4px -4px 0 -2px var(--ink)}
+.mac-title{
+  font-family:var(--pixel);font-size:clamp(11px,.9vw,13.5px);letter-spacing:.1em;
+  background:#fff;padding:1px 10px;border:2px solid var(--ink);
+}
+
+.mac-body{padding:clamp(16px,1.8vw,28px)}
+
+/* --- the About document --- */
+.doc h1{
+  font-family:var(--display);font-weight:900;letter-spacing:-.035em;
+  font-size:clamp(26px,3.2vw,44px);line-height:1.05;margin-bottom:14px;
+}
+
+.doc p{
+  font-size:clamp(14px,1.1vw,17px);line-height:1.75;
+  max-width:56ch;margin-bottom:13px;
+}
+
+.doc-sign{
+  font-family:var(--pixel);font-size:clamp(11px,.9vw,13px);
+  letter-spacing:.12em;color:var(--shu);
+  border-top:2px solid rgba(22,34,74,.2);padding-top:12px;margin-top:6px;
+}
+
+/* --- photo stack --- */
+.stack-frame{
+  position:relative;
+  background:var(--mizu);border:2px solid var(--ink);
+  aspect-ratio:4/3;overflow:hidden;
+}
+
+.stack-frame:focus-visible{outline:3px solid var(--shu);outline-offset:3px}
+.stack-under{
+  position:absolute;inset:0;background:#fff;border:2px solid var(--ink);
+}
+
+.stack-under.a{transform:rotate(1.6deg) scale(.985)}
+.stack-under.b{transform:rotate(-1.1deg) scale(.99)}
+.stack-card{position:absolute;inset:0;animation:flipIn .3s ease}
+.stack-card img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes flipIn{
+  from{opacity:0;transform:translateX(var(--from,14px)) scale(.985)}
+  to{opacity:1;transform:none}
+}
+
+.stack-card[data-dir="-1"]{--from:-14px}
+
+.stack-caption{
+  font-size:clamp(12.5px,1vw,15px);color:rgba(22,34,74,.8);
+  margin:11px 0 13px;min-height:2.6em;
+}
+
+.stack-controls{display:flex;align-items:center;gap:9px}
+.mac-btn{
+  flex:none;cursor:pointer;
+  width:clamp(28px,2.6vw,34px);height:clamp(28px,2.6vw,34px);
+  border:2px solid var(--ink);background:#fff;color:var(--ink);
+  font-size:11px;line-height:1;
+  box-shadow:2px 2px 0 var(--ink);
+}
+
+.mac-btn:hover{background:var(--kiiro)}
+.mac-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+.stack-strip{display:flex;gap:5px;flex:1;min-width:0;overflow-x:auto}
+.strip-cell{
+  flex:none;cursor:pointer;padding:0;
+  width:clamp(34px,3.4vw,46px);aspect-ratio:1;
+  border:2px solid var(--ink);background:#fff;
+  filter:grayscale(1);opacity:.55;
+}
+
+.strip-cell img{width:100%;height:100%;object-fit:cover;display:block}
+.strip-cell.on{filter:none;opacity:1;box-shadow:0 0 0 2px var(--shu)}
+.strip-cell:hover{filter:none;opacity:1}
+
+.stack-status{
+  display:flex;justify-content:space-between;gap:12px;
+  margin-top:11px;padding-top:8px;
+  border-top:2px solid rgba(22,34,74,.2);
+  font-family:var(--pixel);font-size:clamp(10px,.8vw,12px);
+  letter-spacing:.1em;color:rgba(22,34,74,.7);
+}
+
+/* --- tool palette --- */
+.palette{
+  background:var(--kinari);border:2px solid var(--ink);
+  box-shadow:7px 7px 0 var(--ink);
+  padding-bottom:clamp(12px,1.2vw,18px);
+}
+
+.pal-bar{
+  display:flex;align-items:center;gap:9px;
+  border-bottom:2px solid var(--ink);padding:6px 10px;
+  font-family:var(--pixel);font-size:clamp(10.5px,.85vw,12.5px);letter-spacing:.16em;
+}
+
+.pal-grip{
+  flex:none;width:26px;height:11px;border:2px solid var(--ink);
+  background:repeating-linear-gradient(to bottom,var(--ink) 0 1px,transparent 1px 3px);
+}
+
+.pal-group{padding:clamp(12px,1.2vw,17px) clamp(12px,1.2vw,18px) 0}
+.pal-label{
+  display:block;font-family:var(--pixel);
+  font-size:clamp(9.5px,.78vw,11.5px);letter-spacing:.2em;
+  color:var(--shu);margin-bottom:9px;
+}
+
+.pal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:6px}
+.pal-tool{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  border:2px solid var(--ink);background:#fff;
+  padding:7px 4px;box-shadow:2px 2px 0 var(--ink);
+  transition:background .12s ease,transform .12s ease;
+}
+
+.pal-tool:hover{background:var(--kiiro);transform:translate(-1px,-1px)}
+.pal-tool b{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(14px,1.2vw,18px);letter-spacing:-.02em;
+}
+
+.pal-tool i{
+  font-family:var(--pixel);font-style:normal;
+  font-size:clamp(9px,.72vw,10.5px);letter-spacing:.06em;
+  color:rgba(22,34,74,.75);text-align:center;
+}
+
+/* --- desktop icons --- */
+.icons{
+  display:flex;flex-wrap:wrap;gap:clamp(16px,2vw,34px);
+  margin-top:clamp(20px,2.2vw,36px);
+  padding-top:clamp(18px,2vw,30px);
+  border-top:2px dashed rgba(22,34,74,.35);
+}
+
+.desk-icon{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  text-decoration:none;color:var(--ink);width:clamp(76px,8vw,104px);
+}
+
+.icon-glyph{
+  display:grid;place-items:center;
+  width:clamp(48px,5vw,66px);aspect-ratio:1;
+  border:2px solid var(--ink);background:#fff;
+  box-shadow:4px 4px 0 var(--ink);
+  font-size:clamp(20px,2vw,28px);
+  transition:background .14s ease,transform .14s ease;
+}
+
+.desk-icon:hover .icon-glyph{background:var(--kiiro);transform:translate(-2px,-2px)}
+.icon-label{
+  font-family:var(--pixel);font-size:clamp(10px,.82vw,12px);letter-spacing:.1em;
+  background:var(--ink);color:var(--kinari);padding:2px 7px;text-align:center;
+}
+
+@media (max-width:860px){
+  .desk-grid{grid-template-columns:1fr}
+  .macwin{transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .stack-card{animation:none}
+}

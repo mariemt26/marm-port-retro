@@ -1,0 +1,149 @@
+/* =====================================================
+   SPECIAL MENU + PUZZLE (about page)
+   Paste at the end of app/styles.css
+   ===================================================== */
+
+/* --- dropdown --- */
+.menu-drop{position:relative}
+.menu-item.dim{opacity:.45}
+.menu-item.trigger{
+  cursor:pointer;border:none;background:none;padding:2px 7px;
+  font:inherit;letter-spacing:inherit;color:var(--ink);
+}
+.menu-item.trigger:hover,.menu-item.trigger.on{
+  background:var(--ink);color:var(--kinari);
+}
+
+.drop{
+  position:absolute;left:0;top:calc(100% + 6px);z-index:50;
+  min-width:210px;list-style:none;margin:0;padding:4px 0;
+  background:var(--kinari);
+  border:2px solid var(--ink);
+  box-shadow:5px 5px 0 var(--ink);
+}
+
+.drop li{margin:0}
+.drop button{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  width:100%;cursor:pointer;text-align:left;
+  border:none;background:none;color:var(--ink);
+  font-family:var(--pixel);font-size:clamp(11px,.9vw,13px);letter-spacing:.1em;
+  padding:7px 12px;
+}
+
+.drop button:hover:not(:disabled){background:var(--ink);color:var(--kinari)}
+.drop button:disabled{opacity:.35;cursor:default}
+.drop-key{opacity:.55;font-size:.9em}
+.drop-sep{height:0;border-top:2px solid rgba(22,34,74,.25);margin:4px 0}
+
+/* --- modal shell --- */
+.mac-modal{
+  position:fixed;inset:0;z-index:180;
+  display:grid;place-items:center;padding:clamp(14px,3vw,40px);
+  background:rgba(14,22,38,.72);
+  animation:lbIn .16s ease;
+}
+.modal-win{
+  width:min(420px,100%);
+  background:#fff;border:3px solid var(--ink);
+  box-shadow:12px 12px 0 rgba(0,0,0,.45);
+  transform:none;
+}
+
+.modal-win.narrow{width:min(360px,100%)}
+.mac-close.as-btn{cursor:pointer;padding:0}
+.mac-close.as-btn:hover{background:var(--shu)}
+
+/* --- puzzle --- */
+.puzzle{display:flex;flex-direction:column;gap:12px}
+.puz-board{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:5px;
+  background:var(--mizu);border:2px solid var(--ink);padding:5px;
+  aspect-ratio:1;
+}
+
+.puz-tile{
+  cursor:pointer;display:grid;place-items:center;
+  border:2px solid var(--ink);background:var(--kinari);color:var(--ink);
+  box-shadow:2px 2px 0 var(--ink);
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(15px,2.4vw,24px);letter-spacing:-.02em;
+  transition:background .1s ease;
+}
+
+.puz-tile:hover:not(:disabled){background:var(--kiiro)}
+.puz-tile:active:not(:disabled){transform:translate(2px,2px);box-shadow:none}
+.puz-tile:disabled{cursor:default;opacity:.75}
+.puz-hole{display:block}
+
+.puz-bar{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.puz-status{
+  font-family:var(--pixel);font-size:clamp(10px,.85vw,12.5px);
+  letter-spacing:.12em;color:var(--shu);
+}
+
+/* --- about box --- */
+.aboutbox h3{
+  font-family:var(--display);font-weight:900;letter-spacing:-.03em;
+  font-size:clamp(19px,2vw,26px);
+}
+
+.ab-ver{
+  font-family:var(--pixel);font-size:clamp(9.5px,.8vw,11.5px);
+  letter-spacing:.14em;color:rgba(22,34,74,.65);margin-top:4px;
+}
+
+.ab-mem{
+  display:grid;gap:9px;margin:16px 0;
+  padding-top:14px;border-top:2px solid rgba(22,34,74,.2);
+}
+
+.ab-mem div{display:grid;grid-template-columns:88px 1fr;align-items:center;gap:10px}
+.ab-mem dt{
+  font-family:var(--pixel);font-size:clamp(9px,.75vw,11px);letter-spacing:.12em;
+}
+
+.ab-mem dd{
+  position:relative;display:flex;align-items:center;gap:8px;
+  font-family:var(--pixel);font-size:clamp(9px,.75vw,11px);
+  border:2px solid var(--ink);height:17px;padding-right:6px;
+  justify-content:flex-end;
+}
+
+.ab-mem .bar{
+  position:absolute;left:0;top:0;bottom:0;
+  background:repeating-linear-gradient(-45deg,
+    var(--kiiro) 0 4px, var(--ink) 4px 8px);
+}
+
+.ab-note{
+  font-size:clamp(12px,.95vw,14px);line-height:1.6;
+  color:rgba(22,34,74,.75);
+}
+
+/* --- shut down --- */
+.shutdown{
+  position:fixed;inset:0;z-index:220;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:22px;background:#05070C;
+  animation:sdIn .5s ease;
+}
+
+@keyframes sdIn{from{opacity:0}to{opacity:1}}
+.sd-msg{
+  font-family:var(--pixel);color:#E9F6F1;text-align:center;
+  font-size:clamp(15px,2.2vw,28px);letter-spacing:.14em;line-height:1.7;
+}
+
+.sd-hint{
+  font-family:var(--pixel);color:rgba(233,246,241,.45);
+  font-size:clamp(9.5px,.8vw,11.5px);letter-spacing:.2em;
+  animation:sdBlink 1.4s steps(1,end) infinite;
+}
+
+@keyframes sdBlink{0%,60%{opacity:1}61%,100%{opacity:.25}}
+
+@media (prefers-reduced-motion:reduce){
+  .mac-modal,.shutdown{animation:none}
+  .sd-hint{animation:none}
+}

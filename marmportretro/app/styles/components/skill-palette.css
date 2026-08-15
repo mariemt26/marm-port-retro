@@ -1,0 +1,41 @@
+/* =====================================================
+   SKILL PALETTE — brand logos + letter tiles
+   ===================================================== */
+.pal-logo{
+  width:clamp(19px,1.7vw,25px);
+  height:clamp(19px,1.7vw,25px);
+  object-fit:contain;display:block;margin-block:1px;
+  transition:transform .12s ease;
+}
+.pal-tool:hover .pal-logo{transform:scale(1.08)}
+
+
+.pal-tool b{
+  display:grid;place-items:center;
+  min-height:clamp(19px,1.7vw,25px);
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(13px,1.15vw,17px);letter-spacing:-.03em;
+  color:var(--ink);
+}
+
+/* --- languages strip --- */
+.lang-list{list-style:none;display:grid;gap:6px}
+.lang-list li{
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  border-bottom:2px dotted rgba(22,34,74,.25);padding-bottom:5px;
+}
+
+.lang-list li:last-child{border-bottom:none}
+.lang-name{
+  font-family:var(--body);font-weight:700;
+  font-size:clamp(13px,1.02vw,15.5px);color:var(--ink);
+}
+
+.lang-level{
+  font-family:var(--pixel);font-size:clamp(8.5px,.7vw,10.5px);
+  letter-spacing:.16em;color:var(--shu);flex:none;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pal-logo{transition:none}
+}

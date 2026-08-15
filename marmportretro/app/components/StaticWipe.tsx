@@ -18,6 +18,7 @@ const WipeContext = createContext<(to: string) => void>((to: string) => {
 });
 
 /** Navigate through a burst of television snow. */
+//JUST LIKE TENNA DELTARUNE
 export const useWipeNavigate = () => useContext(WipeContext);
 
 export function StaticWipeProvider({ children }: { children: ReactNode }) {

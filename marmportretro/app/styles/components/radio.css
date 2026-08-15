@@ -1,0 +1,136 @@
+/* =====================================================
+   RADIO — persistent now-playing unit (Last.fm)
+   ===================================================== */
+.radio{
+  position:fixed;left:20px;bottom:20px;z-index:80;width:296px;
+  background:linear-gradient(165deg,#EFE6D0 0%,#DCCFB0 60%,#C6B896 100%);
+  border:var(--edge);border-radius:12px;box-shadow:7px 7px 0 var(--ink);
+  padding:11px;font-family:var(--pixel);
+}
+
+.radio-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.radio-brand{font-size:10px;letter-spacing:.2em;color:var(--ink)}
+.radio-brand em{font-style:normal;color:var(--shu)}
+.radio-toggle{
+  cursor:pointer;border:2px solid var(--ink);background:var(--kinari);
+  font-family:var(--pixel);font-size:11px;line-height:1;padding:4px 7px;
+  box-shadow:2px 2px 0 var(--ink);color:var(--ink);
+}
+
+.radio-toggle:hover{background:var(--kiiro)}
+
+.radio-body{display:flex;gap:10px;align-items:stretch}
+.radio-art{
+  width:66px;height:66px;flex:none;border:2px solid var(--ink);background:var(--sumi);
+  position:relative;overflow:hidden;
+}
+
+.radio-art img{width:100%;height:100%;object-fit:cover}
+.radio-art::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(to bottom,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);
+}
+
+.radio-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.radio-state{font-size:9.5px;letter-spacing:.18em;color:var(--shu)}
+.radio-state.idle{color:rgba(22,34,74,.6)}
+.radio-track{
+  font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;color:var(--ink);
+}
+
+.radio-track span{display:inline-block}
+.radio-track.scroll span{animation:tickerText 11s linear infinite;padding-right:2.5em;will-change:transform}
+@keyframes tickerText{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.radio-artist{font-size:10.5px;letter-spacing:.06em;color:rgba(22,34,74,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.eq{display:flex;align-items:flex-end;gap:2px;height:13px;margin-top:3px}
+.eq i{width:3px;background:var(--ink);height:20%;transform-origin:bottom}
+.radio.playing .eq i{animation:bounce .9s ease-in-out infinite}
+.radio.playing .eq i:nth-child(2){animation-duration:.62s}
+.radio.playing .eq i:nth-child(3){animation-duration:1.15s}
+.radio.playing .eq i:nth-child(4){animation-duration:.78s}
+.radio.playing .eq i:nth-child(5){animation-duration:1.02s}
+@keyframes bounce{0%,100%{height:22%}50%{height:100%}}
+
+.radio-dialstrip{
+  margin-top:9px;height:20px;border:2px solid var(--ink);background:var(--kinari);
+  position:relative;overflow:hidden;cursor:ew-resize;touch-action:none;
+  background-image:repeating-linear-gradient(to right,var(--ink) 0 1px,transparent 1px 11px);
+}
+
+.radio-dialstrip:focus-visible{outline:3px solid var(--shu);outline-offset:2px}
+.radio-needle{
+  position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--shu);
+  transform:translateX(-1.5px);pointer-events:none;
+}
+
+/* station markers on the dial */
+.mark-st,.mark-now{
+  position:absolute;bottom:2px;width:5px;height:7px;
+  transform:translateX(-2.5px);pointer-events:none;
+}
+
+.mark-st{background:rgba(22,34,74,.55)}
+.mark-now{background:var(--kiiro);box-shadow:0 0 0 1px var(--ink);height:10px}
+
+/* off-station: the readout goes to noise */
+.radio.static .radio-track,
+.radio.static .radio-artist{opacity:.55;filter:blur(.3px)}
+.radio.static .radio-state{color:rgba(22,34,74,.5)}
+
+.art-blank{
+  display:grid;place-items:center;width:100%;height:100%;
+  font-family:var(--pixel);font-size:20px;color:rgba(251,247,238,.35);
+}
+
+/* --- preset buttons --- */
+.radio-presets{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
+  margin-top:8px;
+}
+
+.preset{
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;
+  padding:5px 2px 4px;
+  border:2px solid var(--ink);background:var(--kinari);color:var(--ink);
+  box-shadow:0 2px 0 var(--ink);
+  transition:background .12s ease,transform .1s ease,box-shadow .1s ease;
+}
+
+.preset b{
+  font-family:var(--display);font-weight:900;font-size:11px;line-height:1;
+}
+
+.preset i{
+  font-style:normal;font-family:var(--pixel);
+  font-size:7px;letter-spacing:.06em;line-height:1.2;
+  color:rgba(22,34,74,.65);
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+.preset:hover{background:var(--kiiro)}
+.preset:active{transform:translateY(2px);box-shadow:none}
+.preset.on{
+  background:var(--shu);color:var(--kinari);
+  transform:translateY(2px);box-shadow:none;
+}
+
+.preset.on i{color:rgba(251,247,238,.85)}
+.radio.min .radio-presets{display:none}
+
+.radio-hint{
+  display:block;margin-top:7px;text-align:center;
+  font-family:var(--pixel);font-size:9px;letter-spacing:.2em;
+  color:var(--shu);
+}
+
+.radio.static .radio-hint{color:rgba(22,34,74,.45)}
+.radio.min .radio-hint{display:none}
+
+.radio.min .radio-body,.radio.min .radio-dialstrip{display:none}
+.radio.min{width:auto}
+
+@media (max-width:620px){
+  .radio{left:12px;right:12px;bottom:12px;width:auto}
+}

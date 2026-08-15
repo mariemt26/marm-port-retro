@@ -6,6 +6,8 @@ import type { Project } from "../data/projects";
  * top, reel windows below, hinged flap along the bottom edge.
  *
  * `project.image` renders as a thumbnail stuck to the label.
+ * For some reason im struggling with the images so this feature has been discontinued until further notice 
+ * lowk....
  */
 export default function Tape({
   project,

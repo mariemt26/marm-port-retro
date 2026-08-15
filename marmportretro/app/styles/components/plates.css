@@ -1,0 +1,142 @@
+/* =====================================================
+   PLATES + LIGHTBOX (case study screenshots)
+   Paste at the end of app/styles.css
+   ===================================================== */
+.plates{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+  gap:clamp(16px,1.8vw,28px);
+  margin:clamp(20px,2.4vw,36px) 0;
+}
+
+.plate{margin:0}
+.plate.wide{grid-column:1/-1}
+
+.plate-btn{
+  position:relative;display:block;width:100%;padding:0;cursor:zoom-in;
+  background:#fff;border:3px solid var(--ink);
+  box-shadow:5px 5px 0 var(--ink);
+  overflow:hidden;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+
+.plate-btn:hover,.plate-btn:focus-visible{
+  transform:translate(-3px,-3px);
+  box-shadow:9px 9px 0 var(--shu);
+}
+
+.plate-btn img{
+  width:100%;height:auto;display:block;
+  aspect-ratio:4/3;object-fit:cover;object-position:top center;
+}
+
+.plate.wide .plate-btn img{aspect-ratio:16/9}
+
+/* the little zoom badge */
+.plate-zoom{
+  position:absolute;right:8px;bottom:8px;
+  display:grid;place-items:center;
+  width:26px;height:26px;
+  background:var(--kiiro);border:2px solid var(--ink);
+  font-size:12px;color:var(--ink);
+  opacity:0;transform:translateY(4px);
+  transition:opacity .16s ease,transform .16s ease;
+}
+
+.plate-btn:hover .plate-zoom,
+.plate-btn:focus-visible .plate-zoom{opacity:1;transform:none}
+
+.plate figcaption{
+  display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;
+  margin-top:9px;padding-top:7px;
+  border-top:2px dashed rgba(22,34,74,.35);
+  font-size:clamp(12px,.95vw,14px);
+  color:rgba(22,34,74,.78);line-height:1.5;
+}
+
+.fig-no{
+  font-family:var(--pixel);font-size:clamp(9px,.75vw,11px);
+  letter-spacing:.16em;color:var(--shu);flex:none;
+}
+
+/* --- lightbox --- */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:grid;place-items:center;
+  padding:clamp(14px,3vw,44px);
+  background:rgba(14,22,38,.88);
+  animation:lbIn .16s ease;
+}
+
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lightbox:focus{outline:none}
+
+.lb-frame{
+  width:min(1100px,100%);max-height:100%;
+  display:flex;flex-direction:column;
+  background:#FBFAF3;border:3px solid var(--ink);
+  box-shadow:12px 12px 0 rgba(0,0,0,.5);
+}
+
+.lb-bar{
+  display:flex;align-items:center;gap:12px;
+  padding:8px 11px;border-bottom:3px solid var(--ink);
+  background:repeating-linear-gradient(to bottom,
+    var(--ink) 0 1px,transparent 1px 3px);
+}
+
+.lb-title,.lb-count{
+  font-family:var(--pixel);font-size:clamp(10px,.85vw,12.5px);
+  letter-spacing:.16em;background:#FBFAF3;padding:2px 9px;
+  border:2px solid var(--ink);
+}
+
+.lb-count{margin-left:auto;color:rgba(22,34,74,.7)}
+.lb-close{
+  cursor:pointer;width:28px;height:28px;flex:none;
+  border:2px solid var(--ink);background:#fff;color:var(--ink);
+  font-size:13px;line-height:1;box-shadow:2px 2px 0 var(--ink);
+}
+
+.lb-close:hover{background:var(--shu);color:var(--kinari)}
+.lb-close:active{transform:translate(2px,2px);box-shadow:none}
+
+.lb-stage{
+  position:relative;flex:1;min-height:0;
+  display:grid;place-items:center;
+  background:var(--mizu);
+  padding:clamp(10px,1.4vw,20px);
+}
+
+.lb-stage img{
+  max-width:100%;max-height:min(70vh,760px);
+  width:auto;height:auto;display:block;
+  border:2px solid var(--ink);background:#fff;
+}
+.lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  cursor:pointer;width:36px;height:44px;
+  border:2px solid var(--ink);background:#FBFAF3;color:var(--ink);
+  box-shadow:3px 3px 0 var(--ink);font-size:12px;
+}
+
+.lb-nav:hover{background:var(--kiiro)}
+.lb-nav:active{transform:translateY(-50%) translate(2px,2px);box-shadow:none}
+.lb-nav.prev{left:clamp(6px,1vw,14px)}
+.lb-nav.next{right:clamp(6px,1vw,14px)}
+
+.lb-caption{
+  padding:clamp(11px,1.2vw,18px);
+  border-top:3px solid var(--ink);
+  font-size:clamp(13px,1.05vw,16px);line-height:1.6;
+  color:rgba(22,34,74,.85);
+}
+
+@media (max-width:560px){
+  .lb-nav{width:30px;height:38px}
+  .plates{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .lightbox{animation:none}
+  .plate-btn{transition:none}
+}

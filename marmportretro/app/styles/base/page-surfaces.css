@@ -1,0 +1,28 @@
+/* =====================================================
+   PAGE SURFACES — each page sits on its own material
+   ===================================================== */
+
+/* video store: pegboard */
+.page-work{
+  background-image:
+    radial-gradient(rgba(22,34,74,.16) 1.6px,transparent 1.7px),
+    radial-gradient(rgba(22,34,74,.06) 1px,transparent 1px);
+  background-size:28px 28px,14px 14px;
+  background-position:0 0,7px 7px;
+}
+/* back office: faint ruled paper */
+.page-experience{
+  background-image:
+    repeating-linear-gradient(to bottom,
+      transparent 0 33px, rgba(22,34,74,.10) 33px 34px),
+    radial-gradient(rgba(22,34,74,.07) 1px,transparent 1px);
+  background-size:auto,14px 14px;
+}
+/* contact: soft vignette so the phone has somewhere to sit */
+.page-contact{
+  background-image:
+    radial-gradient(ellipse at 50% 42%,
+      rgba(255,255,255,.55) 0%, transparent 62%),
+    radial-gradient(rgba(22,34,74,.09) 1px,transparent 1px);
+  background-size:auto,14px 14px;
+}

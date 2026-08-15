@@ -1,0 +1,124 @@
+/* ============ TELEVISION (home hero) ============ */
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,56px);align-items:center;
+  padding:clamp(24px,4vw,52px) 0 clamp(46px,7vw,84px);
+}
+.tv{
+  position:relative;
+  background:linear-gradient(160deg,#EFE6D0 0%,#DFD2B4 45%,#C6B896 100%);
+  border:var(--edge);border-radius:22px;padding:20px 20px 16px;
+  box-shadow:10px 10px 0 var(--ink);
+  display:grid;grid-template-columns:1fr 84px;gap:16px;
+}
+.screen-hood{background:#2A2B2E;border-radius:14px;padding:10px;box-shadow:inset 0 3px 10px rgba(0,0,0,.6)}
+.screen{
+  position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;
+  container-type:inline-size;container-name:crt;
+  background:radial-gradient(120% 110% at 50% 40%,#1B2C4A 0%,var(--sumi) 70%);
+  box-shadow:inset 0 0 60px rgba(0,0,0,.9);
+}
+.screen::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:5;
+  background:
+    repeating-linear-gradient(to bottom,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),
+    radial-gradient(110% 100% at 50% 50%,transparent 55%,rgba(0,0,0,.65) 100%);
+}
+#snow{position:absolute;inset:0;width:100%;height:100%;z-index:4;opacity:0;pointer-events:none;transition:opacity .12s}
+#snow.on{opacity:.92}
+
+.ch{
+  position:absolute;inset:0;z-index:2;overflow:hidden;
+  padding:clamp(14px,3vw,28px);            /* fallback */
+  padding:6.5cqw;
+  display:flex;flex-direction:column;justify-content:center;
+  color:#E9F6F1;opacity:0;visibility:hidden;transition:opacity .2s;
+}
+.ch.live{opacity:1;visibility:visible}
+.ch .kana{
+  font-family:var(--pixel);letter-spacing:.3em;color:var(--kiiro);
+  font-size:11px;                          /* fallback */
+  font-size:clamp(9px,2.5cqw,12px);
+  margin-bottom:1.6cqw;
+}
+.ch h2{
+  font-family:var(--display);font-weight:900;
+  line-height:1.05;letter-spacing:-.04em;color:#fff;
+  font-size:clamp(20px,3.4vw,34px);        /* fallback */
+  font-size:clamp(17px,6.8cqw,40px);
+  text-shadow:2px 2px 0 var(--shu),4px 4px 0 rgba(0,0,0,.5);
+  text-wrap:balance;
+}
+.ch p{
+  color:#BFD6D0;max-width:34ch;
+  font-size:13px;                          /* fallback */
+  font-size:clamp(10.5px,3.1cqw,14.5px);
+  line-height:1.55;margin-top:2.6cqw;
+}
+.ch .go{
+  font-family:var(--pixel);letter-spacing:.16em;color:var(--sumi);
+  background:var(--kiiro);text-decoration:none;
+  font-size:clamp(9px,2.5cqw,12px);
+  padding:1.9cqw 3.2cqw;margin-top:4cqw;
+  align-self:flex-start;border:2px solid var(--kiiro);
+}
+.ch .go:hover{background:var(--shu);border-color:var(--shu);color:var(--kinari)}
+
+.bug{
+  position:absolute;top:3cqw;right:3.4cqw;z-index:6;
+  font-family:var(--pixel);letter-spacing:.14em;
+  font-size:clamp(8px,2.3cqw,11px);
+  color:#fff;text-shadow:0 0 6px rgba(0,0,0,.9);text-align:right;line-height:1.5;
+}
+.bug em{font-style:normal;color:var(--shu)}
+
+.controls{display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:4px}
+.dial{
+  width:76px;height:76px;border-radius:50%;cursor:pointer;flex:none;
+  border:var(--edge);
+  background:conic-gradient(#F3EADA 0 25%,#D8CBB0 0 50%,#F3EADA 0 75%,#D8CBB0 0);
+  box-shadow:3px 3px 0 var(--ink),inset 0 0 0 6px #EFE6D0;
+  position:relative;transition:transform .38s cubic-bezier(.34,1.56,.64,1);
+}
+.dial::after{
+  content:"";position:absolute;left:50%;top:9px;transform:translateX(-50%);
+  width:6px;height:20px;background:var(--shu);border-radius:3px;
+}
+.dial-cap{font-family:var(--pixel);font-size:10px;letter-spacing:.16em;text-align:center;line-height:1.5}
+.chbtns{display:flex;flex-direction:column;gap:6px;width:100%}
+.chbtns button{
+  font-family:var(--pixel);font-size:11.5px;cursor:pointer;
+  border:2px solid var(--ink);background:var(--kinari);color:var(--ink);
+  padding:6px 2px;box-shadow:2px 2px 0 var(--ink);
+}
+.chbtns button[aria-pressed="true"]{background:var(--shu);color:var(--kinari)}
+.grille{
+  width:100%;height:40px;margin-top:auto;border:2px solid var(--ink);border-radius:4px;
+  background:repeating-linear-gradient(to bottom,var(--ink) 0 2px,transparent 2px 5px);
+}
+
+.badge{
+  display:inline-block;font-family:var(--pixel);font-size:12px;letter-spacing:.2em;
+  background:var(--kiiro);border:var(--edge);padding:5px 12px;box-shadow:4px 4px 0 var(--ink);
+  transform:rotate(-2deg);margin-bottom:22px;
+}
+.logotype{font-family:var(--display);font-weight:900;letter-spacing:-.045em;line-height:.88}
+/* Arabic wordmark — resets the Latin tracking it would otherwise inherit */
+.logotype .ar{
+  display:block;
+  font-family:var(--arabic);font-weight:900;
+  font-size:clamp(40px,6.4vw,112px);
+  letter-spacing:normal;      /* tracking severs Arabic joins */
+  line-height:1.34;           /* Kufi needs vertical room at this size */
+  padding-block:.04em;
+  text-align:left;            /* hugs the left edge like the rest of the hero */
+}
+/* kept in case you want the Latin lockup back */
+.logotype .jp{font-size:clamp(44px,7.4vw,132px);display:block}
+.logotype .en{
+  font-size:clamp(15px,1.8vw,32px);letter-spacing:.3em;color:var(--shu);
+  display:block;margin-top:14px;font-weight:700;
+}
+.lede{margin-top:26px;font-size:clamp(15px,1.35vw,23px);max-width:38ch}
+.hero-meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px;font-family:var(--pixel);font-size:12px;letter-spacing:.08em}
+.hero-meta span{background:var(--kinari);border:2px solid var(--ink);padding:5px 12px;font-size:clamp(12px,.95vw,14px)}

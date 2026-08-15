@@ -1,7 +1,9 @@
 /* =====================================================
    Favorites — the Finder window on the About page.
    Images go in public/favorites/ and paths start with "/".
-   Delete any category you don't want; the tabs adapt.
+   If you're somehow reading this, just know that this favorites
+   page made me realize that I don't watch as much TV shows as I
+   keep thinking I do. This is lowk an issue.
    ===================================================== */
 
 export type Favorite = {

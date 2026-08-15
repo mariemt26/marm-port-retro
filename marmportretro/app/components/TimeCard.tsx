@@ -8,6 +8,8 @@ import type { Role } from "../data/experience";
  *
  * The hole pattern is derived from the role text with a pure hash, so
  * the server and client render identical markup — no Math.random.
+ * This feature is also lowk now discontinued. Another thing to add to the graveyard of broken dreams.
+ * I might come back to this someday tho...
  */
 
 const COLS = 28;

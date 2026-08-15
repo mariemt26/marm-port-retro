@@ -4,13 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import useLastFm from "../hooks/useLastFm";
 import { stations } from "../data/stations";
 
-/**
- * FM MARMALADE — the persistent radio.
- *
- * The dial is real: drag it, click it, arrow-key it, or hit a preset
- * to tune between the live Last.fm feed and your own stations.
- */
-
 const NOW_FREQ = 50; // where the live feed sits on the dial
 
 export default function Radio() {

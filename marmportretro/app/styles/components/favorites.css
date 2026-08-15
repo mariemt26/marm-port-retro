@@ -1,0 +1,89 @@
+/* =====================================================
+   FAVORITES (about page) — Finder window, icon view
+   Paste at the end of app/styles.css
+   ===================================================== */
+.favs{display:flex;flex-direction:column;gap:0}
+
+/* --- folder tabs --- */
+.fav-tabs{
+  display:flex;flex-wrap:wrap;gap:3px;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:0;margin-bottom:clamp(12px,1.4vw,18px);
+}
+
+.fav-tab{
+  cursor:pointer;position:relative;bottom:-2px;
+  border:2px solid var(--ink);border-bottom:none;
+  background:var(--kinari);color:var(--ink);
+  font-family:var(--pixel);font-size:clamp(9.5px,.78vw,11.5px);
+  letter-spacing:.12em;padding:6px 10px;
+  border-radius:4px 4px 0 0;
+}
+
+.fav-tab:hover{background:var(--kiiro)}
+.fav-tab.on{background:#fff;padding-bottom:8px}
+
+/* --- icon grid --- */
+.fav-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(clamp(72px,7vw,96px),1fr));
+  gap:clamp(10px,1.2vw,18px);
+  align-items:start;
+}
+
+.fav-item{
+  cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:7px;padding:6px 4px;
+  border:2px solid transparent;background:none;
+}
+
+.fav-item:hover{border-color:rgba(22,34,74,.3)}
+.fav-item.on{border-color:var(--ink);background:rgba(255,194,46,.25)}
+
+.fav-cover{
+  display:block;width:100%;aspect-ratio:2/3;
+  border:2px solid var(--ink);background:var(--mizu);
+  box-shadow:3px 3px 0 var(--ink);overflow:hidden;
+}
+
+.fav-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.fav-blank{
+  display:grid;place-items:center;width:100%;height:100%;
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(18px,2vw,26px);color:rgba(22,34,74,.35);
+}
+
+.fav-name{
+  font-family:var(--pixel);font-size:clamp(9px,.72vw,10.5px);
+  letter-spacing:.06em;text-align:center;line-height:1.4;
+  color:var(--ink);word-break:break-word;
+}
+
+.fav-item.on .fav-name{background:var(--ink);color:var(--kinari);padding:1px 5px}
+
+/* --- detail strip --- */
+.fav-detail{
+  margin-top:clamp(12px,1.4vw,18px);padding-top:clamp(10px,1.2vw,15px);
+  border-top:2px solid rgba(22,34,74,.2);
+  min-height:4.4em;
+}
+
+.fav-detail b{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(14px,1.2vw,18px);display:block;
+}
+
+.fav-by{
+  font-family:var(--pixel);font-size:clamp(9px,.75vw,11px);
+  letter-spacing:.14em;color:var(--shu);display:block;margin-top:3px;
+}
+
+.fav-detail p{
+  font-size:clamp(12.5px,1vw,15px);line-height:1.6;
+  color:rgba(22,34,74,.78);margin-top:7px;
+}
+
+.fav-hint{
+  font-family:var(--pixel);font-size:clamp(9.5px,.78vw,11.5px);
+  letter-spacing:.12em;color:rgba(22,34,74,.55);
+}

@@ -1,12 +1,6 @@
 /* =====================================================
    Roles — jobs and club involvement.
    Add an entry and it appears on /experience automatically.
-   `kind` decides which lane it rides on: "work" is the upper
-   track, "club" the lower one.
-
-   `from` / `to` must be "YYYY.MM" — the map places nodes by
-   real date, so the two lanes line up chronologically.
-   Omit `to` for anything you're still doing.
    ===================================================== */
 
 export type Role = {
@@ -16,10 +10,8 @@ export type Role = {
   org: string;
   place: string;
   from: string;
-  /** omit `to` for a role you currently hold */
   to?: string;
   notes: string[];
-  /** emoji or short glyph shown on the map node */
   icon?: string;
 };
 

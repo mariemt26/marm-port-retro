@@ -1,0 +1,45 @@
+
+:root{
+  --mizu:#CDE6DE;      /* mint paper base   */
+  --ink:#16224A;       /* sumi navy         */
+  --shu:#F2432B;       /* torii vermillion  */
+  --kiiro:#FFC22E;     /* marigold          */
+  --momo:#FF7EA8;      /* bubblegum         */
+  --kinari:#FBF7EE;    /* off-white card    */
+  --sumi:#0E1626;      /* screen black      */
+
+  --display:"Zen Kaku Gothic New",system-ui,sans-serif;
+  --body:"Zen Maru Gothic",system-ui,sans-serif;
+  --pixel:"DotGothic16",monospace;
+  --arabic:"Noto Kufi Arabic",system-ui,sans-serif;
+
+  --edge:3px solid var(--ink);
+  --drop:6px 6px 0 var(--ink);
+  --pad:clamp(20px,4vw,80px);
+
+
+  --wrap:1760px;
+  --scale:1;
+}
+
+.hs-root *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+.hs-root{
+  zoom:var(--scale);
+  font-family:var(--body);
+  color:var(--ink);
+  background-color:var(--mizu);
+  background-image:radial-gradient(rgba(22,34,74,.10) 1px,transparent 1px);
+  background-size:14px 14px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+.hs-root :focus-visible{outline:3px solid var(--shu);outline-offset:3px}
+.hs-root img{max-width:100%;display:block}
+
+.wrap{width:100%;max-width:min(var(--wrap),94vw);margin:0 auto;padding:0 var(--pad)}
+main{flex:1}

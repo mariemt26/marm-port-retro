@@ -1,0 +1,6 @@
+/* ============ FOOTER ============ */
+footer{
+  border-top:var(--edge);margin-top:clamp(48px,5vw,88px);padding:clamp(26px,2.4vw,40px) 0 120px;
+  font-family:var(--pixel);font-size:11.5px;letter-spacing:.12em;
+}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}

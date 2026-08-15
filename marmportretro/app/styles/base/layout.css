@@ -1,0 +1,12 @@
+/* ============ SECTIONS ============ */
+.hs-root .wrap > section{padding:clamp(44px,5vw,88px) 0}
+.hs-root .wrap > section:last-child{padding-bottom:clamp(72px,8vw,150px)}
+
+/* ============ SECTION HEADS ============ */
+.head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;border-bottom:var(--edge);padding-bottom:12px;margin-bottom:30px;
+}
+.head h2{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.4vw,60px);letter-spacing:-.035em}
+.head .eyebrow{font-family:var(--pixel);font-size:12px;letter-spacing:.3em;color:var(--shu);display:block;margin-bottom:6px}
+.head .count{font-family:var(--pixel);font-size:12px;letter-spacing:.1em;opacity:.7}

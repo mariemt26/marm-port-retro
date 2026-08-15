@@ -1,0 +1,111 @@
+/* =====================================================
+   PAGER — a work item
+   Casing takes --case from the project colour.
+   ===================================================== */
+.pager{
+  position:relative;display:block;text-decoration:none;color:var(--ink);
+  border:var(--edge);border-radius:14px;box-shadow:var(--drop);
+  padding:clamp(13px,1.2vw,20px);margin-top:9px;
+  background:
+    linear-gradient(158deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.08) 40%,rgba(0,0,0,.10) 100%),
+    var(--case,#5BC4B4);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+/* belt clip */
+.pager::before{
+  content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  width:78px;height:12px;background:var(--case,#5BC4B4);
+  border:3px solid var(--ink);border-bottom:none;border-radius:7px 7px 0 0;
+}
+.pager:hover,.pager:focus-visible{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--ink)}
+
+/* the little shake on arrival */
+@keyframes buzz{
+  0%,100%{transform:translate(0,0) rotate(0)}
+  20%{transform:translate(-2px,1px) rotate(-.6deg)}
+  40%{transform:translate(2px,-1px) rotate(.5deg)}
+  60%{transform:translate(-1px,-1px) rotate(-.3deg)}
+  80%{transform:translate(1px,1px) rotate(.4deg)}
+}
+.pager:hover .pager-unit,.pager:focus-visible .pager-unit{animation:buzz .3s linear 1}
+
+/* --- LCD --- */
+.lcd{
+  position:relative;overflow:hidden;
+  border:3px solid var(--ink);border-radius:4px;
+  background:#96AD8E;
+  padding:clamp(9px,.9vw,15px) clamp(11px,1.1vw,18px) clamp(11px,1.1vw,17px);
+  box-shadow:inset 0 2px 9px rgba(0,0,0,.4);
+  transition:background .18s ease;
+}
+.pager:hover .lcd,.pager:focus-visible .lcd{background:#BEDC9E}
+.lcd::after{ /* pixel grid */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(10,22,8,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(10,22,8,.16) 1px,transparent 1px);
+  background-size:3px 3px;
+}
+.lcd-top{
+  display:flex;justify-content:space-between;gap:10px;
+  font-family:var(--pixel);font-size:10.5px;letter-spacing:.14em;
+  color:rgba(16,30,12,.78);
+}
+.lcd-msg{
+  font-family:var(--pixel);font-size:clamp(23px,2.1vw,38px);line-height:1.2;
+  color:#101E0C;margin-top:5px;letter-spacing:.02em;
+  white-space:nowrap;overflow:hidden;text-overflow:clip;
+}
+.lcd-sub{
+  font-family:var(--pixel);font-size:9.5px;letter-spacing:.16em;
+  color:rgba(16,30,12,.72);margin-top:5px;
+}
+
+/* --- controls strip --- */
+.pager-face{
+  display:flex;align-items:center;gap:10px;
+  margin:10px 3px 11px;
+}
+.pager-brand{
+  font-family:var(--pixel);font-size:9.5px;letter-spacing:.2em;
+  color:rgba(22,34,74,.8);margin-right:auto;
+}
+.pager-keys{display:flex;gap:5px}
+.pager-keys i{
+  width:16px;height:9px;display:block;border-radius:2px;
+  border:2px solid var(--ink);background:var(--kinari);
+}
+.led{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--shu);border:2px solid var(--ink);flex:none;
+}
+.pager:hover .led,.pager:focus-visible .led{animation:blip .7s steps(1,end) infinite}
+@keyframes blip{0%,49%{opacity:1}50%,100%{opacity:.2}}
+
+/* --- printed label: the part people actually read --- */
+.pager-info{
+  background:var(--kinari);border:3px solid var(--ink);
+  padding:clamp(13px,1.2vw,20px);display:flex;flex-direction:column;gap:9px;
+}
+.pager-info h3{font-family:var(--display);font-weight:700;font-size:clamp(18px,1.5vw,26px);letter-spacing:-.02em}
+.pager-info p{font-size:clamp(13.5px,1.05vw,18px);color:rgba(22,34,74,.78)}
+.pager-info .metric{
+  display:flex;gap:14px;flex-wrap:wrap;
+  font-family:var(--pixel);font-size:11px;letter-spacing:.08em;
+}
+.pager-info .metric b{color:var(--shu)}
+.pager-info .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:2px}
+.pager-info .tags i{
+  font-family:var(--pixel);font-style:normal;font-size:10.5px;letter-spacing:.1em;
+  border:1.5px solid var(--ink);padding:2px 7px;
+}
+
+/* pagers need a little more room than the old cards */
+.grid{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:clamp(22px,2.2vw,40px)}
+
+
+/* ============ WIDE SCREENS ============ */
+@media (min-width:1500px){
+  .hero{gap:clamp(40px,4vw,96px);padding-top:clamp(34px,3vw,72px)}
+  .radio{width:352px}
+}
