@@ -53,9 +53,7 @@ export default function Radio() {
     return () => clearInterval(id);
   }, [onNow, locked, nearest.name]);
 
-  /* Marquee the headline only when it overflows.
-     Keyed to the headline itself, NOT the frequency — otherwise every
-     pointer move during a drag re-measures and the text flickers. */
+
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;

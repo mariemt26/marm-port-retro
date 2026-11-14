@@ -6,7 +6,7 @@
    than a damn 2,000 line singular file. I don't know, we'll see.
    ===================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Kufi+Arabic:wght@700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Kufi+Arabic:wght@700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Zen+Maru+Gothic:wght@400;500;700&display=swapfamily=Chakra+Petch:wght@400;500;600;700');
 
 /* ── base: tokens, chrome, layout, global behaviour ── */
 @import "./styles/base/tokens.css";
