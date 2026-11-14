@@ -1,17 +1,27 @@
 /* =====================================================
-   Every project lives here.
+   Every project lives here. Add one object and it shows
+   up on /projects automatically.
+
+   A project links to a case study ONLY if it has a
+   `study` key. Leave it off and the tape renders but
+   doesn't go anywhere — which is what you want until
+   the write-up actually exists.
    ===================================================== */
 
 export type Metric = { label: string; value: string };
 export type Fact = { label: string; value: string };
 export type Plate = {
+  /** path in /public — must start with "/" and NOT include "public" */
   src: string;
+  /** shown under the plate and in the lightbox */
   caption: string;
+  /** describe the image for screen readers */
   alt: string;
+  /** true for wide screenshots — takes a full row */
   wide?: boolean;
 };
-
 export type StudySection = {
+  /** small kicker label above the heading */
   kana: string;
   title: string;
   body?: string[];
@@ -19,26 +29,29 @@ export type StudySection = {
   pull?: string;
   images?: Plate[];
 };
-
 export type Study = {
   headline: [string, string];
   facts: Fact[];
   sections: StudySection[];
   gallery?: Plate[];
+  /** optional — omit entirely rather than inventing numbers */
   results?: { value: string; label: string }[];
   reflection?: string;
 };
-
 export type Project = {
   slug: string;
   sku: string;
   year: string;
   title: string;
+  /** short display label on the pager LCD / cassette label */
   label: string;
+  /** thumbnail in /public — path must start with "/" */
   image?: string;
+  /** describe the thumbnail for screen readers */
   imageAlt?: string;
   color: string;
   blurb: string;
+  /** leave as [] until you have numbers you can back up */
   metrics: Metric[];
   tags: string[];
   featured?: boolean;
@@ -46,6 +59,55 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "fobo",
+    sku: "FOB-06",
+    year: "2026",
+    title: "FOBO: Fear of Burning Out",
+    label: "FOBO",
+    color: "#CDE6DE",
+    blurb:
+      "A personal capacity planner for the weeks that look manageable on paper but leave you exhausted. Make plans, keep your boundaries, and leave a little room to recharge. Made for Knight Hacks IX.",
+    metrics: [],
+    tags: ["UI/UX DESIGN", "MOBILE", "HACKATHON"],
+    study: {
+      headline: ["Make room for plans.", "Leave room for yourself."],
+      facts: [
+        { label: "ROLE", value: "UI designer, UX writing contributor" },
+        { label: "TEAM", value: "Four members" },
+        { label: "STACK", value: "Expo, React Native, Neon, Gemini" },
+        { label: "YEAR", value: "2026" },
+      ],
+      sections: [
+        {
+          kana: "THE APP",
+          title: "A Full Calendar, an Empty Battery",
+          body: [
+            "Between classes, work, and making time for the people we care about, it's easy to say yes to more than we can handle. A calendar can tell us whether we're free, but it can't always tell us whether we have the energy. For Knight Hacks IX, my team and I built FOBO, a personal capacity planner that helps users consider both before taking on another commitment.",
+          ],
+        },
+        {
+          kana: "MY ROLE",
+          title: "Getting to Know You",
+          body: [
+            "I designed the UI for the onboarding and profile screens, working on the parts of FOBO where users first introduce themselves to the app and later return to their personal settings. The onboarding questions explore how users recharge and what affects their energy, giving the planning experience a personal starting point.",
+            "Alongside the screen designs, I reviewed portions of the app's UX writing. I also created our slide deck and wrote the Devpost submission, bringing the team's work together into a story about what FOBO does and why we made it.",
+          ],
+        },
+        {
+          kana: "VISUAL IDENTITY",
+          title: "A Little Paper, a Little Personality",
+          body: [
+            "Our team settled on a cut-paper visual language, with warm backgrounds, colorful scraps, and expressive little characters. Each day becomes a stack of plans: the height represents energy cost, while colors and different cut edges distinguish the types of commitments. The characters give those days a personality, including a sleeping character for rest.",
+            "For my onboarding and profile screens, that shared direction provided the visual foundation. These screens needed to feel like part of the same world as the planner, even when the user was answering questions or adjusting their profile.",
+          ],
+          pull: "Recharging is just as important as a busy day out.",
+        },
+      ],
+      // Add screenshots here as they become available:
+      // gallery: [{ src: "/fobo/week.png", caption: "...", alt: "..." }],
+    },
+  },
   {
     slug: "fleurish",
     sku: "FLR-01",
@@ -87,7 +149,11 @@ export const projects: Project[] = [
       ],
 
       /* ── screenshots ──────────────────────────────────
-         Files go in public/fleurish/. 
+         Files go in public/fleurish/. Rename these to match
+         yours and delete any you don't have — a missing file
+         renders as a broken image.
+         Captions are where the value is: say what the screen
+         solves, not what it is.
          ─────────────────────────────────────────────── */
       gallery: [
         {
@@ -112,6 +178,46 @@ export const projects: Project[] = [
     },
   },
 
+   {
+    slug: "connected",
+    sku: "CNE-03",
+    year: "2026",
+    title: "ConnectEd Fellows",
+    label: "CONNECTED",
+    color: "#FF991C",
+    blurb:
+      "A nonprofit fostering a growing web of education leaders in rural Latin America. I design their wireframes and UI components as a Develop for Good student designer.",
+    metrics: [],
+    tags: ["WEB APP", "EDUCATION", "NONPROFIT"],
+    featured: true,
+    study: {
+      headline: ["Connecting educators.", "Designing for community."],
+      facts: [
+        { label: "ROLE", value: "Student designer" },
+        { label: "TEAM", value: "Develop for Good" },
+        { label: "TOOLS", value: "Figma" },
+        { label: "YEAR", value: "2026" },
+      ],
+      sections: [
+        {
+          kana: "THE PROJECT",
+          title: "A Growing Network of Educators",
+          body: [
+            "ConnectEd Fellows is a nonprofit building networks of education leaders across rural Latin American communities. As a student designer with Develop for Good, I work with fellow designers and a design manager to translate the organization's goals into user-centered web experiences.",
+          ],
+        },
+        {
+          kana: "MY ROLE",
+          title: "From Wireframes to the Details",
+          body: [
+            "I design low- and high-fidelity wireframes in Figma, focusing on user flows and accessibility. From the first layout to the placement of a call to action, my work considers how people move through the experience and find what they need.",
+            "I also iterate on UI components, refining typography, iconography, and visual hierarchy through design reviews. Feedback from the team helps shape each revision and connect the individual screens to the broader experience.",
+          ],
+        },
+      ],
+    },
+  },
+
   {
     slug: "knightrate",
     sku: "KNR-02",
@@ -128,120 +234,6 @@ export const projects: Project[] = [
     featured: true,
     // No `study` yet — the tape renders but doesn't link.
     // Add one when the write-up is ready.
-  },
-
-  {
-    slug: "connected",
-    sku: "CNE-03",
-    year: "2026",
-    title: "ConnectEd Fellows",
-    label: "CONNECTED",
-    color: "#FF991C",
-    blurb:
-      "A nonprofit connecting education leaders across rural Latin America. We rebuilt how their site explains the fellowship, and gave the team the tools to run it themselves.",
-    metrics: [],
-    tags: ["WEB", "NONPROFIT", "DEVELOP FOR GOOD"],
-    featured: true,
-    study: {
-      headline: ["A site that could", "enforce a message."],
-      facts: [
-        { label: "ROLE", value: "Designer" },
-        { label: "TEAM", value: "Develop for Good — 3 designers, 5 developers, 2 managers" },
-        { label: "CLIENT", value: "ConnectEd Fellows" },
-        { label: "DURATION", value: "May — August 2026" },
-      ],
-      sections: [
-        {
-          kana: "THE CLIENT",
-          title: "A network of local educators, not a charity handing things down",
-          body: [
-            "ConnectEd Fellows is a nonprofit founded in 2013 that connects, equips and grows a network of local education leaders in rural Latin America. It backs the educators already in those communities and the projects they run, thriving on a bottom-up model rather than a top-down one.",
-            "They work across Guatemala and Nicaragua, and expanded into Colombia this year. That expansion brings the Fellows network to 92 schools across three countries, reaching more than 19,000 people.",
-          ],
-        },
-        {
-          kana: "THE PROBLEM",
-          title: "A model nobody could find, on a stack nobody could maintain",
-          body: [
-            "The site didn\u2019t clearly communicate what the fellowship actually was, what it had achieved, or how someone could get involved. Three of the most important things an organisation has to say, and they were all spread across countless pages and communicated using disconnected jargon.",
-            "Underneath, the tech stack was complex and expensive enough that the team couldn\u2019t comfortably manage the site themselves. And they had no visibility into performanc. They had no sense of who was arriving, from where, or what they did next.",
-          ],
-          pull:
-            "A nonprofit that can\u2019t update its own website has a design problem, not a technical one.",
-        },
-        {
-          kana: "PROCESS",
-          title: "Scope in May, build through summer, hand it over in August",
-          body: [
-            "We opened with a scoping phase in May, aligning with the client on objectives, constraints and priorities. Potential solutions were weighed on impact, effort and technical complexity before anything got built.",
-            "Development ran June through August in continuous iteration cycles, folding in feedback from both the client and our mentor on each requirement. A midpoint check-in in July validated the direction. August went to handoff: documentation covering what we\u2019d shipped, what we hadn\u2019t, and what a future team should pick up.",
-          ],
-        },
-        {
-          kana: "FAQ",
-          title: "Answers where the questions actually occur",
-          body: [
-            "We started with a plain wireframe to agree the structure and behaviour before refining anything, and worked inside ConnectEd\u2019s existing orange-and-white branding and coherent design system so it stayed visually consistent.",
-            "To decide what belonged in it, we each audited the site independently, looking for places where information felt unclear or under-explained. That surfaced the real questions rather than the ones we assumed people had.",
-            "The decision I\u2019d defend hardest: we didn\u2019t make it a standalone FAQ page. It sits inside the browsing experience, so a visitor hits clarification right after learning about the model, the impact, or how to get involved, appearing at the moment the question forms, not on a page they\u2019d have to go looking for.",
-          ],
-        },
-        {
-          kana: "POST-DONATION",
-          title: "A receipt is a dead end",
-          body: [
-            "The confirmation page was doing nothing but confirming. We rebuilt it around four goals: show donors where the money goes, reinforce trust, keep offering ways to be involved, and open more paths to stay connected.",
-            "That meant surfacing relevant calls to action, trust and certification badges, and ConnectEd\u2019s social channels. In turn, the end of a transaction became the start of a relationship.",
-          ],
-        },
-        {
-          kana: "TESTIMONIALS",
-          title: "Letting visitors choose which impact they care about",
-          body: [
-            "A static wall of quotes asks the reader to do the sorting. We added category filtering so visitors can browse stories by the values and areas of impact they\u2019re actually interested in.",
-            "We also built an \"Add Your Story\" pathway, so fellows, donors and other stakeholders can contribute their own. That shifted the page from displaying testimonials to collecting them.",
-            "A bonafide wall of positive, first-hand accounts."
-          ],
-        },
-        {
-          kana: "PLUMBING",
-          title: "Newsletter, analytics, and a stack the team can afford",
-          body: [
-            "We streamlined the newsletter subscription flow, making it easier for visitors to sign up, and ensuring less complexity in the tools the organisation has to maintain.",
-            "We also implemented a GA4 dashboard surfacing traffic and engagement across their key recruitment channels, including WhatsApp and Facebook. The point was was to turn tracking output that nobody on the team could interpret into visualisations they could act on.",
-            "The whole build sits on WordPress with WPForms, Elementor, WP Mail SMTP and Bluehost, an established choice because ConnectEd already had licences for most of it. It is cheap to keep running, and nothing they\u2019d need us to operate.",
-          ],
-        },
-      ],
- 
-      gallery: [
-        {
-          src: "/connected/faq.png",
-          caption: "The FAQ, built as its own page rather than being baked into exisiting user flow",
-          alt: "FAQ section in ConnectEd's orange and white branding",
-        },
-        {
-          src: "/connected/post-donation.png",
-          caption: "Post-donation page, featuring trust badges, next steps, and social channels",
-          alt: "Donation confirmation screen with calls to action",
-        },
-        {
-          src: "/connected/testimonials.png",
-          caption: "Testimonials with category filtering and an Add Your Story pathway, crucial for prospective donors and education leaders",
-          alt: "Testimonial page showing filter categories",
-        },
-      ],
- 
-      results: [
-        { value: "92", label: "SCHOOLS IN NETWORK" },
-        { value: "19,000+", label: "PEOPLE REACHED" },
-        { value: "3", label: "COUNTRIES" },
-        { value: "GA4", label: "ANALYTICS, FROM ZERO" },
-      ],
- 
-      reflection:
-        "Time contraints were tough to deal with, especially near the end of the program. With our client busy throughout the month of July, a lot of communication between our client and our team became muddled and sparse. Greater communication would be enforced in a foreseeable future, with a higher frequency of meetings between the single weekly client meeting enforced. The landing page, although sleek and inviting, was in need of greater adjustments that were not approved at the end. I wish to see an altered home page utilizing the interactive wireframe that my team and I created being utilized.",
-    },
   },
 
   {
